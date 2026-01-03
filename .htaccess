@@ -1,0 +1,26 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Set your base directory (adjust if your project is in a subfolder)
+    # Example: if URL is http://localhost/plan_journey/, use "/plan_journey/"
+    RewriteBase /plan_journey/
+
+    # Redirect URLs with index.php to clean URL
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
+    RewriteRule ^index\.php(.*)$ $1 [R=301,L]
+
+    # Send all requests to index.php (front controller)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php/$1 [L]
+
+    # Optional: Remove trailing slash (except for directories)
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+</IfModule>
+
+# If mod_rewrite is not enabled
+<IfModule !mod_rewrite.c>
+    ErrorDocument 404 /index.php
+</IfModule>

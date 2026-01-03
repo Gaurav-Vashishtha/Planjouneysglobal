@@ -1,0 +1,15 @@
+
+    /* (copy the CSS you already provided; simplified here) */
+    * { margin:0; padding:0; box-sizing:border-box; font-family: "Poppins", sans-serif; }
+    body { display:flex; background:#f5f7fa; min-height:100vh; }
+    .sidebar { width:220px; background:#2c3e50; color:#fff; position:fixed; height:100%; transition:0.3s; }
+    .sidebar .logo { text-align:center; padding:20px 0; border-bottom:1px solid rgba(255,255,255,0.1); }
+    .sidebar .logo img { width:70px; border-radius:50%; }
+    .sidebar .nav { list-style:none; padding:20px 0; }
+    .sidebar .nav li { padding:15px 20px; display:flex; align-items:center; }
+    .sidebar .nav li a { color:#fff; text-decoration:none; width:100%; display:block; }
+    .sidebar .nav li.active, .sidebar .nav li:hover { background:#1abc9c; }
+    .main-content { margin-left:220px; width:calc(100% - 220px); transition:0.3s; }
+    .topbar { height:60px; background:#fff; display:flex; justify-content:space-between; align-items:center; padding:0 20px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+    .content-area { padding:20px; }
+    @media(max-width:768px) { .sidebar {width:70px;} .main-content{margin-left:70px;width:calc(100% - 70px);} .sidebar .logo img{width:50px;} }

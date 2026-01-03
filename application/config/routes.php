@@ -1,0 +1,248 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+/*
+| -------------------------------------------------------------------------
+| URI ROUTING
+| -------------------------------------------------------------------------
+| This file lets you re-map URI requests to specific controller functions.
+|
+| Typically there is a one-to-one relationship between a URL string
+| and its corresponding controller class/method. The segments in a
+| URL normally follow this pattern:
+|
+|	example.com/class/method/id/
+|
+| In some instances, however, you may want to remap this relationship
+| so that a different class/function is called than the one
+| corresponding to the URL.
+|
+| Please see the user guide for complete details:
+|
+|	https://codeigniter.com/userguide3/general/routing.html
+|
+| -------------------------------------------------------------------------
+| RESERVED ROUTES
+| -------------------------------------------------------------------------
+|
+| There are three reserved routes:
+|
+|	$route['default_controller'] = 'welcome';
+|
+| This route indicates which controller class should be loaded if the
+| URI contains no data. In the above example, the "welcome" class
+| would be loaded.
+|
+|	$route['404_override'] = 'errors/page_missing';
+|
+| This route will tell the Router which controller/method to use if those
+| provided in the URL cannot be matched to a valid route.
+|
+|	$route['translate_uri_dashes'] = FALSE;
+|
+| This is not exactly a route, but allows you to automatically route
+| controller and method names that contain dashes. '-' isn't a valid
+| class or method name character, so it requires translation.
+| When you set this option to TRUE, it will replace ALL dashes in the
+| controller and method URI segments.
+|
+| Examples:	my-controller/index	-> my_controller/index
+|		my-controller/my-method	-> my_controller/my_method
+*/
+$route['default_controller'] = 'welcome';
+$route['404_override'] = '';
+$route['translate_uri_dashes'] = FALSE;
+
+
+$route['admin'] = 'admin';
+$route['admin/login'] = 'admin/login';
+$route['admin/logout'] = 'admin/logout';
+$route['admin/dashboard'] = 'admin/dashboard';
+
+$route['admin/change_password'] = 'admin/changePassword';
+
+$route['admin/package'] = 'package/index';
+$route['admin/package/create'] = 'package/create';
+$route['admin/package/edit/(:num)'] = 'package/edit/$1';
+
+$route['admin/package/view/(:num)'] = 'package/view/$1';
+$route['admin/package/delete/(:num)'] = 'package/delete/$1';
+$route['admin/package/toggle/(:num)'] = 'package/toggle/$1';
+$route['admin/package/get_location/(:any)'] = 'package/get_locations_by_category/$1';
+
+
+
+$route['admin/package/get_hotels_by_location/(:num)'] = 'package/get_hotels_by_location/$1';
+$route['admin/package/search_countries'] = 'package/search_countries';
+$route['admin/package/search_states']    = 'package/search_states';
+$route['admin/package/search_cities']    = 'package/search_cities';
+
+
+
+
+$route['admin/hotels'] = 'hotels/index';
+$route['admin/hotels/create'] = 'hotels/create';
+$route['admin/hotels/edit/(:num)'] = 'hotels/edit/$1';
+$route['admin/hotels/view/(:num)'] = 'hotels/view/$1';
+$route['admin/hotels/delete/(:num)'] = 'hotels/delete/$1';
+$route['admin/hotels/toggle/(:num)'] = 'hotels/toggle/$1';
+
+$route['admin/locations'] = 'location/index';
+$route['admin/location/add'] = 'location/add';
+$route['admin/location/edit/(:num)'] = 'location/edit/$1';
+$route['admin/location/view/(:num)'] = 'location/view/$1';
+$route['admin/location/delete/(:num)'] = 'location/delete/$1';
+$route['admin/location/toggle/(:num)'] = 'location/toggle/$1';
+$route['admin/location/search_countries'] = 'location/search_countries';
+$route['admin/location/search_states']    = 'location/search_states';
+$route['admin/location/search_cities']    = 'location/search_cities';
+$route['admin/location/delete-gallery/(:num)/(:any)'] = 'location/delete_gallery_image/$1/$2';
+
+
+
+$route['admin/bookings'] = 'Booking/index';
+$route['admin/bookings/download'] = 'Booking/download';
+$route['admin/package/download/(:num)'] = 'package/download_pdf/$1';
+
+//blog
+$route['admin/blog'] = 'blog/index';
+$route['admin/blog/add'] = 'blog/add';
+$route['admin/blog/edit/(:num)'] = 'blog/edit/$1';
+$route['admin/blog/delete/(:num)'] = 'blog/delete/$1';
+
+
+// home page 
+$route['admin/home_page'] = 'Homepage/index';
+$route['admin/home_page/save'] = 'Homepage/save';
+$route['admin/home_page/edit/(:num)'] = 'Homepage/edit/$1';
+
+//AdvertiesBanner
+$route['admin/adverties_banner'] = 'AdvertiesBanner/index';
+$route['admin/adverties_banner/create'] = 'AdvertiesBanner/create';
+$route['admin/adverties_banner/save'] = 'AdvertiesBanner/save';
+$route['admin/adverties_banner/edit/(:num)'] = 'AdvertiesBanner/edit/$1';
+$route['admin/adverties_banner/update/(:num)'] = 'AdvertiesBanner/update/$1';
+$route['admin/adverties_banner/delete/(:num)'] = 'AdvertiesBanner/delete/$1';
+
+
+//Banner
+$route['admin/banner']                 = 'Banner/index';
+$route['admin/banner/add']             = 'Banner/add';
+$route['admin/banner/save-add']        = 'Banner/save_add';
+$route['admin/banner/edit/(:num)']     = 'Banner/edit/$1';
+$route['admin/banner/save-edit/(:num)']= 'Banner/save_edit/$1';
+$route['admin/banner/delete/(:num)']   = 'Banner/delete/$1';
+
+//video
+
+$route['admin/video'] = 'video/index';       
+$route['admin/video/add'] = 'video/add';     
+$route['admin/video/edit/(:num)'] = 'video/edit/$1'; 
+$route['admin/video/delete/(:num)'] = 'video/delete/$1'; 
+
+//Activites
+$route['admin/activities'] = 'activity/index';
+$route['admin/activities/create'] = 'activity/create';
+$route['admin/activities/edit/(:num)'] = 'activity/edit/$1';
+
+$route['admin/activities/view/(:num)'] = 'activity/view/$1';
+$route['admin/activities/delete/(:num)'] = 'activity/delete/$1';
+$route['admin/activities/toggle/(:num)'] = 'activity/toggle/$1';
+$route['admin/activities/get_location/(:any)'] = 'activity/get_locations_by_category/$1';
+
+//Pages
+
+$route['admin/about_us'] = 'about/index';                 
+$route['admin/about_us/save'] = 'about/save';             
+$route['admin/about_us/edit(:num)'] = 'about/edit/$1';
+   
+
+// Contact Page Routes
+$route['admin/contact'] = 'contact/index';              
+$route['admin/contact/save'] = 'contact/save';          
+$route['admin/contact/edit/(:num)'] = 'contact/edit/$1'; 
+
+// application/config/routes.php
+
+$route['admin/footer'] = 'footer/index';        
+$route['admin/footer/save'] = 'footer/save';      
+$route['admin/footer/edit/(:num)'] = 'footer/edit/$1';  
+
+// Recent Customer Experience
+$route['admin/recent_experience'] = 'recent_experience/index';
+$route['admin/recent_experience/save'] = 'recent_experience/save';
+$route['admin/recent_experience/save/(:num)'] = 'recent_experience/save/$1';
+$route['admin/recent_experience/edit/(:num)'] = 'recent_experience/edit/$1';
+$route['admin/recent_experience/delete/(:num)'] = 'recent_experience/delete/$1';
+
+
+
+
+//APIs
+
+// locations
+$route['api/locations/list']['get'] = 'Api/LocationsController/get_locations';
+$route['api/locations/(:any)']['get'] = 'Api/LocationsController/get_location_details/$1';
+$route['api/location/full/(:any)']['get'] = 'Api/LocationsController/get_location/$1';
+$route['api/locations/byCategory/(:any)']['get'] = 'Api/LocationsController/get_locationsByCategory/$1';
+$route['api/top_destionations']['get'] = 'Api/LocationsController/get_top_destinations';
+$route['api/popularlocations/byCategory/(:any)']['get'] = 'Api/LocationsController/get_popularlocationsByCategory/$1';
+
+
+
+// for all
+$route['api/tour-packages']['get'] = 'Api/PackageController/get_packages';
+$route['api/tour-packages/(:any)']['get'] = 'Api/PackageController/get_package/$1';
+$route['api/package/(:any)']['get'] = 'Api/PackageController/get_package_by_slug/$1';
+$route['api/popular_Packages']['get'] = 'Api/PackageController/get_popular_packages';
+
+
+ // Register
+$route['api/userRegistration']['post']       = 'Api/UserController'; 
+// reset password
+$route['api/user/change_password']['post'] = 'Api/UserController/change_password';
+
+
+ // Login
+$route['api/user/login']['post'] = 'Api/UserController/login'; 
+
+
+// Booking API
+$route['api/booking']['post'] = 'Api/BookingController/index';
+
+// Contact_Us API
+$route['api/contact_us']['post'] = 'Api/BookingController/contact_us_form';
+
+
+//home page 
+
+$route['api/home_page']['get'] = 'Api/HomeController/get_home_page_data';
+$route['api/home_page/banners']['get'] = 'Api/HomeController/get_bannner_list';
+$route['api/home_page/banner_detail/(:any)']['get'] = 'Api/HomeController/get_banner/$1';
+$route['api/home_page/videos']['get'] = 'Api/HomeController/get_video_list';
+$route['api/home_page/video_detail/(:any)']['get'] = 'Api/HomeController/get_videos/$1';
+$route['api/blogs']['get'] = 'Api/HomeController/get_blog_list';
+$route['api/blog_detail/(:any)']['get'] = 'Api/HomeController/get_blog/$1';
+$route['api/activitiesBanner']['get'] = 'Api/HomeController/get_all_advertiesBanner';
+
+
+//Activity
+
+$route['api/activities']['get'] = 'Api/ActivityController/get_activities';
+$route['api/activity/(:any)']['get'] = 'Api/ActivityController/get_activity_by_slug/$1';
+
+
+// Pages
+$route['api/recent_experience']['get'] = 'Api/PagesConroller/get_recent_experience';
+$route['api/about_page']['get'] = 'Api/PagesConroller/get_about_page';
+$route['api/contact_page']['get'] = 'Api/PagesConroller/get_contact_page';
+$route['api/footer_page']['get'] = 'Api/PagesConroller/get_footer_page';
+
+
+
+
+
+
+
+
+
