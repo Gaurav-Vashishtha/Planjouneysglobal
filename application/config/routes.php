@@ -49,12 +49,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
-$route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+$route['default_controller'] = 'admin';
+// $route['404_override'] = '';
+// $route['translate_uri_dashes'] = FALSE;
 
 
-$route['admin'] = 'admin';
 $route['admin/login'] = 'admin/login';
 $route['admin/logout'] = 'admin/logout';
 $route['admin/dashboard'] = 'admin/dashboard';
@@ -112,26 +111,26 @@ $route['admin/blog/delete/(:num)'] = 'blog/delete/$1';
 
 
 // home page 
-$route['admin/home_page'] = 'Homepage/index';
-$route['admin/home_page/save'] = 'Homepage/save';
-$route['admin/home_page/edit/(:num)'] = 'Homepage/edit/$1';
+$route['admin/home_page'] = 'homepage/index';
+$route['admin/home_page/save'] = 'homepage/save';
+$route['admin/home_page/edit/(:num)'] = 'homepage/edit/$1';
 
 //AdvertiesBanner
-$route['admin/adverties_banner'] = 'AdvertiesBanner/index';
-$route['admin/adverties_banner/create'] = 'AdvertiesBanner/create';
-$route['admin/adverties_banner/save'] = 'AdvertiesBanner/save';
-$route['admin/adverties_banner/edit/(:num)'] = 'AdvertiesBanner/edit/$1';
-$route['admin/adverties_banner/update/(:num)'] = 'AdvertiesBanner/update/$1';
-$route['admin/adverties_banner/delete/(:num)'] = 'AdvertiesBanner/delete/$1';
+$route['admin/adverties_banner'] = 'advertiesBanner/index';
+$route['admin/adverties_banner/create'] = 'advertiesBanner/create';
+$route['admin/adverties_banner/save'] = 'advertiesBanner/save';
+$route['admin/adverties_banner/edit/(:num)'] = 'advertiesBanner/edit/$1';
+$route['admin/adverties_banner/update/(:num)'] = 'advertiesBanner/update/$1';
+$route['admin/adverties_banner/delete/(:num)'] = 'advertiesBanner/delete/$1';
 
 
 //Banner
-$route['admin/banner']                 = 'Banner/index';
-$route['admin/banner/add']             = 'Banner/add';
-$route['admin/banner/save-add']        = 'Banner/save_add';
-$route['admin/banner/edit/(:num)']     = 'Banner/edit/$1';
-$route['admin/banner/save-edit/(:num)']= 'Banner/save_edit/$1';
-$route['admin/banner/delete/(:num)']   = 'Banner/delete/$1';
+$route['admin/banner']                 = 'banner/index';
+$route['admin/banner/add']             = 'banner/add';
+$route['admin/banner/save_add']        = 'banner/save_add';
+$route['admin/banner/edit/(:num)']     = 'banner/edit/$1';
+$route['admin/banner/save_edit/(:num)']= 'banner/save_edit/$1';
+$route['admin/banner/delete/(:num)']   = 'banner/delete/$1';
 
 //video
 
@@ -149,6 +148,7 @@ $route['admin/activities/view/(:num)'] = 'activity/view/$1';
 $route['admin/activities/delete/(:num)'] = 'activity/delete/$1';
 $route['admin/activities/toggle/(:num)'] = 'activity/toggle/$1';
 $route['admin/activities/get_location/(:any)'] = 'activity/get_locations_by_category/$1';
+$route['admin/activities/get_activities_by_category/(:num)'] = 'activity/get_activities_by_category/$1';
 
 //Pages
 
@@ -156,13 +156,13 @@ $route['admin/about_us'] = 'about/index';
 $route['admin/about_us/save'] = 'about/save';             
 $route['admin/about_us/edit(:num)'] = 'about/edit/$1';
    
+//Contact
 
-// Contact Page Routes
 $route['admin/contact'] = 'contact/index';              
 $route['admin/contact/save'] = 'contact/save';          
 $route['admin/contact/edit/(:num)'] = 'contact/edit/$1'; 
 
-// application/config/routes.php
+//Footer
 
 $route['admin/footer'] = 'footer/index';        
 $route['admin/footer/save'] = 'footer/save';      
@@ -176,7 +176,45 @@ $route['admin/recent_experience/edit/(:num)'] = 'recent_experience/edit/$1';
 $route['admin/recent_experience/delete/(:num)'] = 'recent_experience/delete/$1';
 
 
+//testimonial
+ 
+$route['admin/testimonial'] = 'testimonial/index';
+$route['admin/testimonial/add'] = 'testimonial/add';
+$route['admin/testimonial/save_add'] = 'testimonial/save_add';
+$route['admin/testimonial/edit/(:num)'] = 'testimonial/edit/$1';
+$route['admin/testimonial/save_edit/(:num)'] = 'testimonial/save_edit/$1';
+$route['admin/testimonial/delete/(:num)'] = 'testimonial/delete/$1';
+ 
+//tourguide
+ 
+ 
+$route['admin/tourguide'] = 'tourguide/index';
+$route['admin/tourguide/add'] = 'tourguide/add';
+$route['admin/tourguide/save_add'] = 'tourguide/save_add';
+$route['admin/tourguide/edit/(:num)'] = 'tourguide/edit/$1';
+$route['admin/tourguide/save_edit/(:num)'] = 'tourguide/save_edit/$1';
+$route['admin/tourguide/delete/(:num)'] = 'tourguide/delete/$1';
 
+
+// Visadetails Routes
+$route['admin/visadetails'] = 'visaDetails/index';
+$route['admin/visadetails/add'] = 'visaDetails/add';
+$route['admin/visadetails/save_add'] = 'visaDetails/save_add';
+$route['admin/visadetails/edit/(:num)'] = 'visaDetails/edit/$1';
+$route['admin/visadetails/update/(:num)'] = 'visaDetails/update/$1';
+$route['admin/visadetails/delete/(:num)'] = 'visaDetails/delete/$1';
+
+
+$route['admin/visalistdetail'] = 'visaDetails/index_visa';
+$route['admin/visa_package/add'] = 'visaDetails/visa_package_add';
+$route['admin/visa_package/save'] = 'visaDetails/visa_package_save';
+$route['admin/visa_package/edit/(:num)'] = 'visaDetails/visa_package_edit/$1';
+$route['admin/visa_package/update/(:num)'] = 'visaDetails/visa_package_update/$1';
+$route['admin/visa_package/delete/(:num)'] = 'visaDetails/visa_package_delete/$1';
+
+//currency 
+$route['admin/currency'] = 'currency/index';
+$route['admin/currency/update'] = 'currency/update';
 
 //APIs
 
@@ -195,6 +233,12 @@ $route['api/tour-packages']['get'] = 'Api/PackageController/get_packages';
 $route['api/tour-packages/(:any)']['get'] = 'Api/PackageController/get_package/$1';
 $route['api/package/(:any)']['get'] = 'Api/PackageController/get_package_by_slug/$1';
 $route['api/popular_Packages']['get'] = 'Api/PackageController/get_popular_packages';
+$route['api/domestic_packages']['get'] = 'Api/PackageController/get_domestic_packages';
+$route['api/domestic_honeymoon_packages']['get'] = 'Api/PackageController/domestic_honeymoon_packages';
+$route['api/packages_by_location/(:any)']['get'] = 'Api/PackageController/get_package_by_location/$1';
+
+
+
 
 
  // Register
@@ -212,18 +256,19 @@ $route['api/booking']['post'] = 'Api/BookingController/index';
 
 // Contact_Us API
 $route['api/contact_us']['post'] = 'Api/BookingController/contact_us_form';
+$route['api/visa_form']['post'] = 'Api/BookingController/visa_form_sumbit';
+
 
 
 //home page 
 
 $route['api/home_page']['get'] = 'Api/HomeController/get_home_page_data';
-$route['api/home_page/banners']['get'] = 'Api/HomeController/get_bannner_list';
-$route['api/home_page/banner_detail/(:any)']['get'] = 'Api/HomeController/get_banner/$1';
+$route['api/home_page/banners/(:any)'] = 'Api/HomeController/get_banner_list/$1';
 $route['api/home_page/videos']['get'] = 'Api/HomeController/get_video_list';
 $route['api/home_page/video_detail/(:any)']['get'] = 'Api/HomeController/get_videos/$1';
 $route['api/blogs']['get'] = 'Api/HomeController/get_blog_list';
 $route['api/blog_detail/(:any)']['get'] = 'Api/HomeController/get_blog/$1';
-$route['api/activitiesBanner']['get'] = 'Api/HomeController/get_all_advertiesBanner';
+$route['api/advertiesBanner']['get'] = 'Api/HomeController/get_all_advertiesBanner';
 
 
 //Activity
@@ -238,11 +283,40 @@ $route['api/about_page']['get'] = 'Api/PagesConroller/get_about_page';
 $route['api/contact_page']['get'] = 'Api/PagesConroller/get_contact_page';
 $route['api/footer_page']['get'] = 'Api/PagesConroller/get_footer_page';
 
+//Testimonial Api
+$route['api/tourguide']['get'] = 'Api/HomeController/get_tourguide';
+
+//tourguide Api
+$route['api/testimonial']['get'] = 'Api/HomeController/get_testimonial';
+
+//filter for packages
+$route['api/destinationwithcount']['get'] = 'Api/LocationsController/get_location_groups_with_package_count';
+$route['api/packages/filter']['post']  = 'Api/PackageController/get_filtered_packages';
 
 
+//filter for activities 
+$route['api/destinationwithcountingactivity'] = 'Api/LocationsController/get_location_groups_with_activity_count';
+$route['api/activities/filter']['post']  = 'Api/ActivityController/get_filtered_activities';
 
 
+//visa
+$route['api/visa_list']['get'] = 'Api/PagesConroller/get_visa_list';
+$route['api/visa_detail/(:any)']['get'] = 'Api/PagesConroller/get_visa_detail/$1';
+$route['api/visa_list_detail']['get'] = 'Api/PagesConroller/get_visa_detail_list';
 
 
+// search filter
+
+$route['api/search_packages']['post'] = 'Api/PackageController/get_searched_packages';
+
+//Searchbox apis
+$route['api/search_packages']['post'] = 'Api/PackageController/get_searched_packages';
+$route['api/search_visas']['post'] = 'Api/PagesConroller/search_visa';
+$route['api/search_activities_with_value']['post'] = 'Api/ActivityController/search_activities';
+$route['api/search_packages_with_value']['post'] = 'Api/PackageController/search_packages';
 
 
+//Searchbox dropdown
+$route['api/search_location']['post'] = 'Api/ActivityController/search_locations';
+$route['api/search_packagelocation']['post'] = 'Api/PackageController/search_package_locations';
+$route['api/search_visa_country']['post'] = 'Api/PagesConroller/search_visa_countries';
