@@ -124,6 +124,15 @@ $route['admin/adverties_banner/update/(:num)'] = 'advertiesBanner/update/$1';
 $route['admin/adverties_banner/delete/(:num)'] = 'advertiesBanner/delete/$1';
 
 
+//Poster
+$route['admin/poster'] = 'poster/index';
+$route['admin/poster/create'] = 'poster/create';
+$route['admin/poster/save'] = 'poster/save';
+$route['admin/poster/edit/(:num)'] = 'poster/edit/$1';
+$route['admin/poster/update/(:num)'] = 'poster/update/$1';
+$route['admin/poster/delete/(:num)'] = 'poster/delete/$1';
+
+
 //Banner
 $route['admin/banner']                 = 'banner/index';
 $route['admin/banner/add']             = 'banner/add';

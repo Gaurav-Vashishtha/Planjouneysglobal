@@ -24,14 +24,7 @@ $action = isset($banner)
             <?php endif; ?>
         </div>
 
-        <!-- <div class="col-md-6 mb-3">
-            <label>Banner Image 2</label>
-            <input type="file" name="banner2" class="form-control">
-            <?php // if (!empty($banner->banner2)): ?>
-                <img src="<? // = base_url($banner->banner2) ?>" width="150" class="mt-2">
-            <?php  // endif; ?>
-        </div> -->
-    </div>
+
 
     <div class="row">
 

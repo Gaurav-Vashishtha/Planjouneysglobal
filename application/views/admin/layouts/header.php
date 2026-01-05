@@ -246,6 +246,8 @@
                     <li><a href="<?= base_url('admin/footer'); ?>"><i class="far fa-circle"></i> Manage Footer</a></li>
                     <li><a href="<?= base_url('admin/recent_experience'); ?>"><i class="far fa-circle"></i> Manage Customer Experience</a></li>
                     <li><a href="<?= base_url('admin/visalistdetail'); ?>"><i class="far fa-circle"></i> Manage List Details</a></li>
+                    <li><a href="<?= base_url('admin/poster'); ?>"><i class="far fa-circle"></i> Manage Poster</a></li>
+
 
                 </ul>
             </li>
