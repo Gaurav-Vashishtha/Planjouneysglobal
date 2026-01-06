@@ -329,3 +329,7 @@ $route['api/search_packages_with_value']['post'] = 'Api/PackageController/search
 $route['api/search_location']['post'] = 'Api/ActivityController/search_locations';
 $route['api/search_packagelocation']['post'] = 'Api/PackageController/search_package_locations';
 $route['api/search_visa_country']['post'] = 'Api/PagesConroller/search_visa_countries';
+
+$route['api/search_activity_list_dropdown']['post'] = 'Api/ActivityController/search_activities_with_list';
+
+

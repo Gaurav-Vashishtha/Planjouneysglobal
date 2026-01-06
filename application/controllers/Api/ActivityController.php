@@ -17,7 +17,7 @@ class ActivityController extends CI_Controller
         parent::__construct();
         $this->load->model('Location_model');
         $this->load->model('Activity_model');
-        $this->load->model('Currency_model'); // Load Currency model to get rates
+        $this->load->model('Currency_model'); 
         $this->load->helper(['url', 'text', 'form']);
 
         $this->output->set_content_type('application/json');
@@ -158,7 +158,7 @@ class ActivityController extends CI_Controller
 
 public function search_locations()
 {
-$keyword = $this->input->post('keyword') ?? $this->input->get('keyword') ?? null;
+ $keyword = $this->input->post('keyword') ?? $this->input->get('keyword') ?? null;
 
     $this->load->model('Location_model');
     $locations = $this->Location_model->get_locations_with_activity_count($keyword);
@@ -173,32 +173,44 @@ $keyword = $this->input->post('keyword') ?? $this->input->get('keyword') ?? null
 
 public function search_activities()
 {
-    $location_id = $this->input->post('location_id');
-    $category_activity = $this->input->post('category_activity');
+    $location_id    = $this->input->post('location_id');
+    $activity_name  = $this->input->post('activity_names');
 
-    if (empty($location_id) && empty($category_activity)) {
+    if (empty($location_id) && empty($activity_name)) {
         return $this->output
             ->set_content_type('application/json')
             ->set_output(json_encode([
-                'status' => false,
+                'status'  => false,
                 'message' => 'At least one filter is required',
-                'data' => []
+                'data'    => []
             ]));
     }
 
     $this->load->model('Activity_model');
+
     $activities = $this->Activity_model->get_activities_search(
         $location_id,
-        $category_activity
+        $activity_name
     );
 
-    $rates = $this->get_rates(); 
+    if (empty($activities)) {
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode([
+                'status' => true,
+                'message' => 'No activies found for this location',
+                'data'   => []
+            ]));
+    }
+
+    $rates = $this->get_rates();
 
     foreach ($activities as &$activity) {
-        $price = isset($activity['price']) ? (float)$activity['price'] : 0;
-        $activity['price_inr'] = $price;
-        $activity['price_usd'] = round($price * $rates['USD'], 2);
-        $activity['price_aed'] = round($price * $rates['AED'], 2);
+        $price = (float) $activity['price'];
+
+        $activity['price_inr']  = $price;
+        $activity['price_usd']  = round($price * $rates['USD'], 2);
+        $activity['price_aed']  = round($price * $rates['AED'], 2);
         $activity['rate_timestamp'] = $rates['timestamp'];
     }
 
@@ -206,7 +218,23 @@ public function search_activities()
         ->set_content_type('application/json')
         ->set_output(json_encode([
             'status' => true,
-            'data' => $activities
+            'data'   => $activities
+        ]));
+}
+
+
+public function search_activities_with_list()
+
+{
+ $keyword = $this->input->post('keyword') ?? $this->input->get('keyword') ?? null;
+
+    $activities = $this->Activity_model->get_activities($keyword);
+
+    return $this->output
+        ->set_content_type('application/json')
+        ->set_output(json_encode([
+            'status' => true,
+            'data'   => $activities
         ]));
 }
 

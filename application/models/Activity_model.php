@@ -9,7 +9,7 @@ class Activity_model extends CI_Model {
         parent::__construct();
     }
 
- public function get_all($limit = null, $offset = null, $filters = []) {
+  public function get_all($limit = null, $offset = null, $filters = []) {
     $this->db->from($this->table);
 
     if (!empty($filters['category'])) $this->db->where('category', $filters['category']);
@@ -25,7 +25,7 @@ class Activity_model extends CI_Model {
     if ($limit !== null) $this->db->limit((int)$limit, (int)$offset);
 
     return $this->db->get()->result(); 
-}
+  }
 
 
 
@@ -89,85 +89,112 @@ class Activity_model extends CI_Model {
 
 
     public function count_by_location($location_id)
-{
-    return $this->db->where('location_id', $location_id)
-                    ->count_all_results('activities');
-}
+    {
+        return $this->db->where('location_id', $location_id)
+                        ->count_all_results('activities');
+    }
 
 
-public function get_activities_filtered($categories, $locations, $sort)
-{
-    $this->db->select('activities.*, location.name as location_name');
+    public function get_activities_filtered($categories, $locations, $sort)
+    {
+        $this->db->select('activities.*, location.name as location_name');
+        $this->db->from('activities');
+        $this->db->join('location', 'location.id = activities.location_id', 'left');
+
+        if (!empty($categories)) {
+            if (!is_array($categories)) {
+                $categories = explode(',', $categories);
+            }
+
+            $this->db->where_in('activities.category', $categories);
+        }
+        if (!empty($locations)) {
+            if (!is_array($locations)) {
+                $locations = explode(',', $locations);
+            }
+
+            $this->db->where_in('activities.location_id', $locations);
+        }
+
+        switch ($sort) {
+            case 'price_asc':
+                $this->db->order_by('activities.price', 'ASC');
+                break;
+
+            case 'price_desc':
+                $this->db->order_by('activities.price', 'DESC');
+                break;
+
+            case 'latest':
+                $this->db->order_by('activities.id', 'DESC');
+                break;
+
+            case 'oldest':
+                $this->db->order_by('activities.id', 'ASC');
+                break;
+
+            default:
+                $this->db->order_by('activities.id', 'DESC');
+                break;
+        }
+
+        return $this->db->get()->result();
+    }
+
+ public function get_activities_search($location_id = null, $activity_names = null)
+ {
+    $this->db->select('*');
     $this->db->from('activities');
-    $this->db->join('location', 'location.id = activities.location_id', 'left');
+    $this->db->where('status', 1);
 
-    if (!empty($categories)) {
-        if (!is_array($categories)) {
-            $categories = explode(',', $categories);
+    if (!empty($location_id)) {
+        $this->db->where('location_id', (int) $location_id);
+    }
+
+    if (!empty($activity_names)) {
+        $this->db->where(
+            "FIND_IN_SET(" .
+            $this->db->escape(trim($activity_names)) .
+            ", REPLACE(activity_names, ', ', ',')) !=", 
+            0,
+            false
+        );
+    }
+
+    $this->db->order_by('created_at', 'DESC');
+
+    return $this->db->get()->result_array();
+ }
+
+
+
+    public function get_by_category($category_id) {
+        return $this->db
+            ->where('category_id', $category_id)
+            ->get('activities_name') 
+            ->result();
+    }
+
+
+   public function get_activities($keyword = null)
+    {
+        $this->db->select('activity_name');
+        $this->db->from('activities_name');
+        $this->db->where('activity_name IS NOT NULL');
+
+        if (!empty($keyword)) {
+            $this->db->like('activity_name', $keyword);
         }
 
-        $this->db->where_in('activities.category', $categories);
-    }
-    if (!empty($locations)) {
-        if (!is_array($locations)) {
-            $locations = explode(',', $locations);
-        }
+        $this->db->group_by('activity_name'); 
+        $this->db->order_by('activity_name', 'ASC');
+        $this->db->limit(10);   
 
-        $this->db->where_in('activities.location_id', $locations);
-    }
+        $query = $this->db->get();
 
-    switch ($sort) {
-        case 'price_asc':
-            $this->db->order_by('activities.price', 'ASC');
-            break;
-
-        case 'price_desc':
-            $this->db->order_by('activities.price', 'DESC');
-            break;
-
-        case 'latest':
-            $this->db->order_by('activities.id', 'DESC');
-            break;
-
-        case 'oldest':
-            $this->db->order_by('activities.id', 'ASC');
-            break;
-
-        default:
-            $this->db->order_by('activities.id', 'DESC');
-            break;
+        return array_column($query->result_array(), 'activity_name');
     }
 
-    return $this->db->get()->result();
-}
-
-public function get_activities_search($location_id = null, $category_activity = null)
-{
- $this->db->select('*');
-$this->db->from('activities');
-$this->db->where('status', 1);
-
-if (!empty($location_id)) {
-    $this->db->where('location_id', (int)$location_id);
-}
-
-if (!empty($category_activity)) {
-    $this->db->where('category_activity', trim($category_activity));
-}
-
-$this->db->order_by('created_at', 'DESC');
-
-$query = $this->db->get();
-return $query->result_array();
-}
-
-
-public function get_by_category($category_id) {
-    return $this->db
-        ->where('category_id', $category_id)
-        ->get('activities_name') 
-        ->result();
-}
 
 
 }
