@@ -194,6 +194,38 @@ class Activity_model extends CI_Model {
 
         return array_column($query->result_array(), 'activity_name');
     }
+ 
+     
+public function search_activites_with_detail($search_term)
+{
+    $columns = $this->db->list_fields('activities');
+    $this->db->group_start();
+
+    foreach ($columns as $column) {
+        if ($column == 'activity_names') {
+            $escaped_search_term = $this->db->escape_str(trim($search_term));
+            
+            $this->db->or_where(
+              "FIND_IN_SET(" .
+            $this->db->escape(trim($escaped_search_term)) .
+            ", REPLACE(activity_names, ', ', ',')) !=", 
+            0,
+            false
+        );
+ 
+        } else {
+            $this->db->or_like($column, $search_term);
+        }
+    }
+
+    $this->db->group_end();
+    $this->db->where('status', 1);
+    $this->db->order_by('id', 'DESC');
+
+    log_message('debug', 'Generated Query: ' . $this->db->last_query());
+
+    return $this->db->get('activities')->result_array();
+}
 
 
 

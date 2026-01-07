@@ -152,11 +152,14 @@ public function get_packages_filtered($categories, $locations, $sort)
 public function search_popular_packages($search_term)
 {
     $columns = $this->db->list_fields('packages');
+    $this->db->group_start();
     foreach ($columns as $column) {
         $this->db->or_like($column, $search_term);
     }
-    $this->db->where('popular', 1);
+    $this->db->group_end();
     $this->db->where('status', 1);
+    $this->db->where('popular', 1);
+    
 
     $this->db->order_by('id', 'DESC');
 
@@ -216,6 +219,36 @@ public function get_by_location_id($location_id)
         ->get('packages')
         ->result_array();
 }
+
+
+public function search_packages_with_destination($search_term)
+{
+    $search_term = trim($search_term);
+
+    $packages = [];
+    $locations = [];
+    $this->db->select('*');
+    $this->db->from('packages');
+    $this->db->group_start();
+    $this->db->like('title', $search_term); 
+    $this->db->or_like('description', $search_term); 
+    $this->db->group_end();
+    $this->db->where('status', 1);  
+    $this->db->order_by('id', 'DESC'); 
+    $packages = $this->db->get()->result_array();
+
+    $this->db->select('*');
+    $this->db->from('location');
+    $this->db->like('name', $search_term); 
+    $this->db->where('status', 1); 
+    $locations = $this->db->get()->result_array();
+
+    return [
+        'packages' => $packages,
+        'locations' => $locations
+    ];
+}
+
 
 
 

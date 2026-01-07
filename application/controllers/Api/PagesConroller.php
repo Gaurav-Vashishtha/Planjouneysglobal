@@ -465,15 +465,15 @@ public function get_visa_detail_list() {
 
 public function search_visa_countries()
 {
-    $keyword = trim(
-        $this->input->post('keyword') ??
-        $this->input->get('keyword') ??
+    $country_name = trim(
+        $this->input->post('country_name') ??
+        $this->input->get('country_name') ??
         ''
     );
 
     $this->load->model('Visa_model');
 
-    $countries = $this->Visa_model->get_visa_countries($keyword);
+    $countries = $this->Visa_model->get_visa_countries($country_name);
 
     return $this->output
         ->set_content_type('application/json')

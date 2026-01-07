@@ -370,5 +370,43 @@ public function get_location_groups_with_activity_count()
     $this->output->set_output(json_encode($response));
 }
 
+public function searched_destination(){
+
+  $location_name = $this->input->post('location_name');
+
+   if (empty($location_name) ) {
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode([
+                'status' => false,
+                'message' => 'Value is required',
+                'data' => []
+            ]));
+    }
+        $this->load->model('Location_model');
+        $location = $this->Location_model->get_destination_search(
+        $location_name
+       
+    );
+
+    $rates = $this->get_rates(); 
+
+    foreach ($location as &$loc) {
+        $price = isset($loc['price']) ? (float)$loc['price'] : 0;
+        $loc['price_inr'] = $price;
+        $loc['price_usd'] = round($price * $rates['USD'], 2);
+        $loc['price_aed'] = round($price * $rates['AED'], 2);
+        $loc['rate_timestamp'] = $rates['timestamp'];
+    }
+
+    return $this->output
+        ->set_content_type('application/json')
+        ->set_output(json_encode([
+            'status' => true,
+            'data' => $location
+        ]));
+}
 
 }
+
+

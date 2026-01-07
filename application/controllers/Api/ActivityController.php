@@ -238,5 +238,57 @@ public function search_activities_with_list()
         ]));
 }
 
+public function get_searched_activities()
+{
+    try {
+        $search_term = $this->input->post('search_term');
+        if (empty($search_term)) {
+            $response = [
+                'status'  => false,
+                'message' => 'Search term is required.',
+            ];
+            $this->output->set_output(json_encode($response));
+            return;
+        }
+
+        $rates = $this->get_rates();  
+        $result = $this->Activity_model->search_activites_with_detail($search_term);
+        if (!empty($result)) {
+            foreach ($result as &$act) {
+                if (is_array($act)) {
+                    $act = (object) $act;
+                }
+                $inrPrice = isset($act->price) ? (float) $act->price : 0;
+                $act->price_inr = $inrPrice;  
+                $act->price_usd = $inrPrice * $rates['USD'];  
+                $act->price_aed = $inrPrice * $rates['AED']; 
+                $act->rate_timestamp = $rates['timestamp']; 
+            }
+
+            $response = [
+                'status'  => true,
+                'message' => 'Activities fetched successfully.',
+                'data'    => [
+                    'activities' => $result
+                ],
+            ];
+        } else {
+            $response = [
+                'status'  => false,
+                'message' => 'No activities found for the given search term.',
+            ];
+        }
+
+    } catch (Exception $e) {
+        $response = [
+            'status'  => false,
+            'message' => 'Error: ' . $e->getMessage(),
+        ];
+    }
+
+    $this->output->set_output(json_encode($response));
+}
+
+
 }
 ?>

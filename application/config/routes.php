@@ -314,9 +314,7 @@ $route['api/visa_detail/(:any)']['get'] = 'Api/PagesConroller/get_visa_detail/$1
 $route['api/visa_list_detail']['get'] = 'Api/PagesConroller/get_visa_detail_list';
 
 
-// search filter
 
-$route['api/search_packages']['post'] = 'Api/PackageController/get_searched_packages';
 
 //Searchbox apis
 $route['api/search_packages']['post'] = 'Api/PackageController/get_searched_packages';
@@ -331,5 +329,22 @@ $route['api/search_packagelocation']['post'] = 'Api/PackageController/search_pac
 $route['api/search_visa_country']['post'] = 'Api/PagesConroller/search_visa_countries';
 
 $route['api/search_activity_list_dropdown']['post'] = 'Api/ActivityController/search_activities_with_list';
+
+
+
+
+$route['api/search_detination_with_package']['post'] = 'Api/LocationsController/searched_destination';
+
+
+
+
+// search filter
+
+$route['api/search_packages_destinations']['post'] = 'Api/PackageController/get_searched_packages_destination';
+$route['api/search_activities']['post'] = 'Api/ActivityController/get_searched_activities';
+
+
+
+
 
 

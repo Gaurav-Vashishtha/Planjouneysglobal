@@ -134,14 +134,14 @@ class Location_model extends CI_Model
 }
 
 
-public function get_locations_with_package_count($keyword = null)
+public function get_locations_with_package_count($location_name = null)
 {
-    $this->db->select('l.id, l.name AS location, COUNT(a.id) AS package_count');
+    $this->db->select('l.id, l.name AS name, l.slug, COUNT(a.id) AS package_count');
     $this->db->from('location l');
     $this->db->join('packages a', 'a.location_id = l.id AND a.status = 1', 'left');
 
-    if (!empty($keyword)) {
-        $this->db->like('l.name', $keyword); 
+    if (!empty($location_name)) {
+        $this->db->like('l.name', $location_name); 
     }
 
     $this->db->where('l.status', 1);      
@@ -153,4 +153,20 @@ public function get_locations_with_package_count($keyword = null)
     $query = $this->db->get();
     return $query->result_array();
 }
+
+public function get_destination_search($location_name = null) {
+    $this->db->select('*');
+    $this->db->from('location');
+    $this->db->where('status', 1);
+
+    if (!empty($location_name)) {
+        $this->db->where('LOWER(name)', strtolower($location_name)); 
+    }
+
+    $this->db->order_by('created_at', 'DESC');
+    $query = $this->db->get();
+    return $query->result_array();
+}
+
+
 }

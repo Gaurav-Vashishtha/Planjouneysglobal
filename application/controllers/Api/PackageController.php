@@ -231,10 +231,10 @@ public function get_searched_packages()
 
 public function search_package_locations()
 {
-$keyword = $this->input->post('keyword') ?? $this->input->get('keyword') ?? null;
+$location_name = $this->input->post('location_name') ?? $this->input->get('location_name') ?? null;
 
     $this->load->model('Location_model');
-    $locations = $this->Location_model->get_locations_with_package_count($keyword);
+    $locations = $this->Location_model->get_locations_with_package_count($location_name);
 
     return $this->output
         ->set_content_type('application/json')
@@ -379,6 +379,54 @@ public function get_package_by_location($location_id = null)
             'data'    => $packages
         ]));
 }
+
+public function get_searched_packages_destination()
+{
+    try {
+        $search_term = $this->input->post('search_term');
+        if (empty($search_term)) {
+            $response = [
+                'status'  => false,
+                'message' => 'Search term is required.',
+            ];
+            $this->output->set_output(json_encode($response));
+            return;
+        }
+        $rates = $this->get_rates();  
+
+        $result = $this->Package_model->search_packages_with_destination($search_term);
+
+        foreach ($result['packages'] as &$pkg) {
+            if (is_array($pkg)) {
+                $pkg = (object) $pkg;
+            }
+
+            $inrPrice = isset($pkg->price) ? (float) $pkg->price : 0;
+            $pkg->price_inr = $inrPrice;  
+            $pkg->price_usd = $inrPrice * $rates['USD'];  
+            $pkg->price_aed = $inrPrice * $rates['AED']; 
+            $pkg->rate_timestamp = $rates['timestamp']; 
+        }
+
+        $response = [
+            'status'  => true,
+            'message' => 'Packages and locations fetched successfully.',
+            'data'    => [
+                'packages' => $result['packages'],
+                'locations' => $result['locations']
+            ],
+        ];
+
+    } catch (Exception $e) {
+        $response = [
+            'status'  => false,
+            'message' => 'Error: ' . $e->getMessage(),
+        ];
+    }
+    $this->output->set_output(json_encode($response));
+}
+
+
 
 }
 

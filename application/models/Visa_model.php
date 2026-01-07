@@ -76,13 +76,13 @@ class Visa_model extends CI_Model {
 
 
 
-    public function get_visa_countries($keyword = '')
+    public function get_visa_countries($country_name = '')
     {
         $this->db->select('DISTINCT(country_name) as country_name, slug');
         $this->db->from($this->table);
         
-        if (!empty($keyword)) {
-            $this->db->like('country_name', $keyword);
+        if (!empty($country_name)) {
+            $this->db->like('country_name', $country_name);
         }
 
         $this->db->order_by('country_name', 'ASC');
