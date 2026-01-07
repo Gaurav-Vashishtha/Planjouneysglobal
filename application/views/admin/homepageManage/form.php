@@ -37,6 +37,14 @@
     <h3>Popular Packages</h3>
     <textarea name="popular_packages" id="popular_packages" class="form-control mb-3"><?= isset($home->popular_packages) ? $home->popular_packages : '' ?></textarea><br>
 
+     <h3>Popular Activities</h3>
+    <textarea name="popular_activies" id="popular_activies" class="form-control mb-3"><?= isset($home->popular_activies) ? $home->popular_activies : '' ?></textarea><br>
+
+     <h3>Popular Blogs</h3>
+    <textarea name="popular_blogs" id="popular_blogs" class="form-control mb-3"><?= isset($home->popular_blogs) ? $home->popular_blogs : '' ?></textarea><br>
+
+     <h3>Popular Visa</h3>
+    <textarea name="popular_visa" id="popular_visa" class="form-control mb-3"><?= isset($home->popular_visa) ? $home->popular_visa : '' ?></textarea><br>
 
     <h3>Top Destination</h3>
     <input type="text" name="heading" class="form-control mb-1" placeholder="Heading" value="<?= isset($home->top_destination_heading) ? $home->top_destination_heading : '' ?>">
@@ -132,6 +140,10 @@ ClassicEditor.create(document.querySelector('#popular_packages')).catch(err => c
 ClassicEditor.create(document.querySelector('#final_editor')).catch(err => console.error(err));
 ClassicEditor.create(document.querySelector('#top_agency')).catch(err => console.error(err));
 ClassicEditor.create(document.querySelector('#testimonial_section')).catch(err => console.error(err));
+ClassicEditor.create(document.querySelector('#popular_visa')).catch(err => console.error(err));
+ClassicEditor.create(document.querySelector('#popular_blogs')).catch(err => console.error(err));
+ClassicEditor.create(document.querySelector('#popular_activies')).catch(err => console.error(err));
+
 
 </script>
 

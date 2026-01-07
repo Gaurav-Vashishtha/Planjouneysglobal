@@ -109,6 +109,9 @@ class Homepage extends CI_Controller {
             'tab_link' => $post['tab_link'] ?? '',
             'desire_places' => json_encode($desire_places),
             'popular_packages' => $post['popular_packages'] ?? '',
+            'popular_activies' => $post['popular_activies'] ?? '',
+            'popular_blogs' => $post['popular_blogs'] ?? '',
+            'popular_visa' => $post['popular_visa'] ?? '',
             'top_destination_heading' => $post['heading'] ?? '',
             'top_destination_description' => $post['top_destination_description'] ?? '',
             'top_destinations' => json_encode($top_destinations),
@@ -123,6 +126,7 @@ class Homepage extends CI_Controller {
             'top_agency_link' => $post['top_agency_link'] ?? ''
             // 'banner_images' => json_encode($banner_images)
         ];
+
 
         if ($id) {
             $this->Home_page_model->update_home($id, $payload);
