@@ -55,6 +55,7 @@ class Blog extends CI_Controller {
             'meta_description' => $post['meta_description'],
             'meta_keywords_title' => $post['meta_keywords_title'],
             'status' => isset($post['status']) ? 1 : 0,
+            'popular' => isset($post['popular']) ? 1 : 0
         ];
 
 
@@ -105,6 +106,7 @@ class Blog extends CI_Controller {
             'meta_description' => $post['meta_description'],
             'meta_keywords_title' => $post['meta_keywords_title'],
             'status' => isset($post['status']) ? 1 : 0,
+            'popular' => isset($post['popular']) ? 1 : 0
         ];
 
 

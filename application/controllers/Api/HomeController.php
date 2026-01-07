@@ -280,6 +280,45 @@ public function get_blog($slug = null)
 }
 
 
+public function get_popularBlog(){
+        try {
+        $blogs = $this->Blog_model->get_popular_blog();
+
+        if (!empty($blogs)) {
+
+            foreach ($blogs as &$b) {
+                $b->banner_image_url = base_url('uploads/blogs/' . $b->banner_image);
+                $b->home_image_url = base_url('uploads/blogs/' . $b->home_image);
+
+            }
+
+            $response = [
+                'status' => true,
+                'message' => 'blogs fetched successfully.',
+                'data' => $blogs
+            ];
+
+        } else {
+            $response = [
+                'status' => false,
+                'message' => 'No blogs found.',
+                'data' => []
+            ];
+        }
+
+    } catch (Exception $e) {
+        $response = [
+            'status' => false,
+            'message' => 'Error: ' . $e->getMessage()
+        ];
+    }
+
+    $this->output->set_output(json_encode($response));
+}
+
+
+
+
 public function get_all_advertiesBanner()
 {
     $banners = $this->AdvertiesBanner_model->get_all();

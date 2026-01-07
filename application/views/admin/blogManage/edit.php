@@ -78,11 +78,16 @@
             <img src="<?= base_url('uploads/blogs/'.$blog->home_image) ?>" width="150" class="mt-2">
         <?php endif; ?>
     </div>
-
-    <div class="form-check mb-3">
+  <div class = "row">
+    <div class="col-md-6 form-check mb-3">
         <input type="checkbox" name="status" class="form-check-input" id="status" value="1" <?= set_checkbox('status', '1', (string)$blog->status === '1'); ?>>
         <label class="form-check-label" for="status">Active</label>
     </div>
+   <div class="col-md-6 form-check mb-3">
+        <input type="checkbox" name="popular" class="form-check-input" id="popular" value="1" <?= set_checkbox('popular', '1', (string)$blog->popular === '1'); ?>>
+        <label class="form-check-label" for="popular">Popular</label>
+    </div>
+  </div>
 
 
     <div class="mb-3">

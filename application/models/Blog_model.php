@@ -6,7 +6,7 @@ class Blog_model extends CI_Model {
     private $table = 'blogs';
 
     public function get_all() {
-        return $this->db->get($this->table)->result();
+        return $this->db->order_by('id', 'DESC')->get($this->table)->result();
     }
 
     public function get($id) {
@@ -58,6 +58,15 @@ class Blog_model extends CI_Model {
     return $this->db->where('slug', $slug)  
         ->get('blogs')
         ->row();
+}
+
+
+public function get_popular_blog(){
+    return $this->db->where('status', 1)
+                     ->where('popular', 1)
+                     ->order_by('id', 'DESC')
+                     ->get('blogs')
+                     ->result();
 }
 
 }

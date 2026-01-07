@@ -277,6 +277,7 @@ $route['api/home_page/videos']['get'] = 'Api/HomeController/get_video_list';
 $route['api/home_page/video_detail/(:any)']['get'] = 'Api/HomeController/get_videos/$1';
 $route['api/blogs']['get'] = 'Api/HomeController/get_blog_list';
 $route['api/blog_detail/(:any)']['get'] = 'Api/HomeController/get_blog/$1';
+$route['api/popular_blogs']['get'] = 'Api/HomeController/get_popularBlog';
 $route['api/advertiesBanner']['get'] = 'Api/HomeController/get_all_advertiesBanner';
 
 

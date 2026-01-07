@@ -72,12 +72,16 @@
         <label class="form-label">Blog Home Image (365x305 px, jpg/png/jpeg/webp)</label>
         <input type="file" name="home_image" class="form-control" accept=".jpg,.jpeg,.png,.webp">
     </div>
-
-    <div class="form-check mb-3">
-        <input type="checkbox" name="status" class="form-check-input" id="status" value="1" <?= set_checkbox('status','1'); ?>>
-        <label class="form-check-label" for="status">Active</label>
+    <div class = "row">
+        <div class=" col-md-6 form-check mb-3">
+            <input type="checkbox" name="status" class="form-check-input" id="status" value="1" <?= set_checkbox('status','1'); ?>>
+            <label class="form-check-label" for="status">Active</label>
+        </div>
+        <div class=" col-md-6 form-check mb-3">
+            <input type="checkbox" name="popular" class="form-check-input" id="popular" value="1" <?= set_checkbox('popular','1'); ?>>
+            <label class="form-check-label" for="popular">Popular</label>
+        </div>
     </div>
-
     <div class="mb-3">
     <button type="submit" class="btn btn-success">Add Blog</button>
     <a href="<?= base_url('admin/blog'); ?>" class="btn btn-secondary">Cancel</a>
