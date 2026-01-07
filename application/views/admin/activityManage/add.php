@@ -196,12 +196,16 @@
     </div>
 
 </div>
-
-    <div class="mb-3 form-check">
+  <div class="row">
+    <div class="col-md-6 mb-3 form-check">
         <input type="checkbox" name="status" class="form-check-input" id="status" value="1" <?php echo set_checkbox('status','1'); ?>>
         <label class="form-check-label" for="status">Active</label>
     </div>
-
+    <div class="col-md-6 mb-3 form-check">
+        <input type="checkbox" name="popular" class="form-check-input" id="popular" value="1" <?php echo set_checkbox('popular','1'); ?>>
+        <label class="form-check-label" for="popular">Popular</label>
+    </div>
+  </div>
     <div class="text-end">
         <button type="button" class="btn btn-primary next-step" data-next="2">Next →</button>
     </div>

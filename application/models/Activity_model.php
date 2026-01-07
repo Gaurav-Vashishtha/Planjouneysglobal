@@ -222,9 +222,17 @@ public function search_activites_with_detail($search_term)
     $this->db->where('status', 1);
     $this->db->order_by('id', 'DESC');
 
-    log_message('debug', 'Generated Query: ' . $this->db->last_query());
 
     return $this->db->get('activities')->result_array();
+}
+
+public function get_popular_activities(){
+
+    return $this->db->where('status', 1)
+                     ->where('popular', 1)
+                     ->order_by('id', 'DESC')
+                     ->get($this->table)
+                     ->result_array();
 }
 
 

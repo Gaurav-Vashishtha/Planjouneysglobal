@@ -290,5 +290,42 @@ public function get_searched_activities()
 }
 
 
+
+    public function get_popularActivities()
+    {
+        try {
+            $activities = $this->Activity_model->get_popular_activities();
+            $rates = $this->get_rates();
+
+            foreach ($activities as &$activity) {
+                if (is_array($activity)) {
+                    $activity = (object) $activity;
+                }
+
+                $inrPrice = isset($activity->price) ? (float) $activity->price : 0;
+
+                $activity->price_inr = $inrPrice;
+                $activity->price_usd = $inrPrice * $rates['USD'];
+                $activity->price_aed = $inrPrice * $rates['AED'];
+                $activity->rate_timestamp = $rates['timestamp'];
+            }
+
+            $response = 
+            [
+                'status' => true,
+                'message' => 'Activities fetched successfully.',
+                'data' => $activities
+            ];
+        } catch (Exception $e) {
+            $response = [
+                'status' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ];
+        }
+
+        $this->output->set_output(json_encode($response));
+    }
+
+
 }
 ?>

@@ -221,12 +221,16 @@
 
     </div>
 
-
-    <div class="mb-3 form-check">
+ <div class="row">
+    <div class="col-md-6 mb-3 form-check">
         <input type="checkbox" name="status" value="1" class="form-check-input" <?= ($activities->status == 1) ? "checked" : "" ?>>
         <label class="form-check-label">Active</label>
     </div>
-
+    <div class="col-md-6 mb-3 form-check">
+        <input type="checkbox" name="popular" value="1" class="form-check-input" <?= ($activities->popular == 1) ? "checked" : "" ?>>
+        <label class="form-check-label">Popular</label>
+    </div>
+ </div>
     <div class="text-end">
         <button type="button" class="btn btn-primary next-step" data-next="2">Next →</button>
     </div>

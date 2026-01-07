@@ -284,6 +284,8 @@ $route['api/advertiesBanner']['get'] = 'Api/HomeController/get_all_advertiesBann
 
 $route['api/activities']['get'] = 'Api/ActivityController/get_activities';
 $route['api/activity/(:any)']['get'] = 'Api/ActivityController/get_activity_by_slug/$1';
+$route['api/popular_activities']['get'] = 'Api/ActivityController/get_popularActivities';
+
 
 
 // Pages

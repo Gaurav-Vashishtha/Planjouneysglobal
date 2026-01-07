@@ -7,6 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property CI_Form_validation $form_validation
  * @property Activity_model $Activity_model
  * @property Location_model $Location_model
+ * @property db $db
  * @property upload $upload
  */
 
@@ -122,6 +123,8 @@ public function create() {
         'addtional_charge'  => $post['addtional_charge'] ?? null,
         'activity_overview'              => $post['activity_overview'] ?? null,
         'status'           => isset($post['status']) ? 1 : 0,
+        'popular'           => isset($post['popular']) ? 1 : 0
+
     ];
     if (!empty($_FILES['image']['name'])) {
 
@@ -235,6 +238,7 @@ public function edit($id = null)
         'addtional_charge'  => $post['addtional_charge'] ?? null,
         'activity_overview'              => $post['activity_overview'] ?? null,
         'status'            => isset($post['status']) ? 1 : 0,
+        'popular'           => isset($post['popular']) ? 1 : 0,
     ];
 
     if (!empty($_FILES['image']['name'])) {
