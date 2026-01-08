@@ -315,6 +315,8 @@ $route['api/activities/filter']['post']  = 'Api/ActivityController/get_filtered_
 $route['api/visa_list']['get'] = 'Api/PagesConroller/get_visa_list';
 $route['api/visa_detail/(:any)']['get'] = 'Api/PagesConroller/get_visa_detail/$1';
 $route['api/visa_list_detail']['get'] = 'Api/PagesConroller/get_visa_detail_list';
+$route['api/popular_visa']['get'] = 'Api/PagesConroller/get_popular_visa';
+
 
 
 

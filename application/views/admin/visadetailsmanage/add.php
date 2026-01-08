@@ -41,13 +41,7 @@
                     <label class="form-label">Image <small>(Max size: 2 MB)</small></label>
                     <input type="file" name="image" class="form-control" accept="image/*">
                 </div>
-
-               
-                
-
-
-
-           
+          
                 <div class="col-12 mb-3">
                     <label class="form-label">Document Required <span class="text-danger">*</span></label>
                     <textarea name="document_requirement" class="form-control" rows="4" required></textarea>
@@ -65,12 +59,7 @@
                     <textarea name="important_note" class="form-control" rows="4"></textarea>
                 </div>
 
-
-
-
-
-               
-                 <hr>
+                <hr>
                 <h4>Frequently Asked Questions (FAQ)</h4>
                 <div id="faqContainer">
                 <div class="faqItem border p-3 mb-3">
@@ -82,12 +71,21 @@
 
                     <button type="button" class="btn btn-danger removeFaq">Remove</button>
                 </div>
+
+                <div class = "row">
+                    <div class= "col-md-6 mb-3">
+                    <input type="checkbox" name="status" value="1" id="statusCheckbox">
+                    <label for="statusCheckbox"> Active</label>
+                    </div>
+
+                     <div class= "col-md-6 mb-3">       
+                    <input type="checkbox" name="popular" value="1" id="popularCheckbox">
+                    <label for="popularCheckbox"> Popular</label>
+                    </div>
+                </div>
             </div>
             <button type="button" id="addFaq" class="btn btn-primary mb-3">+ Add FAQ</button>
-
-
             </div>
-
             <button type="submit" class="btn btn-primary">Submit</button>
             <a href="<?= base_url('admin/visadetails'); ?>" class="btn btn-secondary">Back</a>
 

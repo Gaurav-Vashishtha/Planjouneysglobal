@@ -36,7 +36,7 @@ class Visa_model extends CI_Model {
 
 
     public function get_all() {
-        return $this->db->get($this->table)->result();
+        return $this->db->order_by('id', 'DESC')->get($this->table)->result();
     }
 
         public function slug_exists($slug) {
@@ -88,6 +88,22 @@ class Visa_model extends CI_Model {
         $this->db->order_by('country_name', 'ASC');
 
         return $this->db->get()->result_array();
+    }
+  
+    
+    public function get_all_active(){
+        return $this->db->where('status', 1)
+                         ->order_by('id', 'DESC')
+                         ->get($this->table)
+                         ->result();
+    }
+
+    public function get_popular_visa(){
+        return $this->db->where('status', 1)
+                         ->where('popular', 1)
+                         ->order_by('id', 'DESC')
+                         ->get($this->table)
+                         ->result();
     }
 
 

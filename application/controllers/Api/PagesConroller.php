@@ -239,7 +239,7 @@ public function get_footer_page() {
 public function get_visa_list() {
 
     try {
-        $visa = $this->Visa_model->get_all();
+        $visa = $this->Visa_model->get_all_active();
 
         if (!empty($visa)) {
 
@@ -281,6 +281,51 @@ public function get_visa_list() {
     $this->output->set_output(json_encode($response));
 }
 
+
+public function get_popular_visa() {
+
+    try {
+        $visa = $this->Visa_model->get_popular_visa();
+
+        if (!empty($visa)) {
+
+            $filtered_visa = [];
+
+            foreach ($visa as $v) {
+
+                $image_url = base_url($v->image); 
+                $filtered_visa[] = [
+                    'id' => $v->id,
+                    'country_name' => $v->country_name,
+                    'slug' => $v->slug,
+                    'processing_time' => $v->processing_time,
+                    'image' => $image_url
+                ];
+            }
+
+            $response = [
+                'status' => true,
+                'message' => 'visa fetched successfully.',
+                'data' => $filtered_visa
+            ];
+
+        } else {
+            $response = [
+                'status' => false,
+                'message' => 'No visa found.',
+                'data' => []
+            ];
+        }
+
+    } catch (Exception $e) {
+        $response = [
+            'status' => false,
+            'message' => 'Error: ' . $e->getMessage()
+        ];
+    }
+
+    $this->output->set_output(json_encode($response));
+}
 
 // public function get_visa_detail($slug = null)
 // {

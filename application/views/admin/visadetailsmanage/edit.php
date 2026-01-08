@@ -40,7 +40,6 @@
                     <?php endif; ?>
                 </div>
 
-             
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Image <small>(Max size: 2 MB)</small></label>
                     <input type="file" name="image" class="form-control" accept="image/*">
@@ -49,8 +48,6 @@
                         <img src="<?= base_url($visa->image); ?>" width="100" class="mt-2">
                     <?php endif; ?>
                 </div>
-
-              
 
                 <div class="col-12 mb-3">
                     <label class="form-label">Document Required <span class="text-danger">*</span></label>
@@ -67,60 +64,55 @@
                     <label class="form-label">Special Note</label>
                     <textarea name="important_note" class="form-control" rows="4"><?= $visa->important_note; ?></textarea>
                 </div>
+                <hr>
+                <h4>Frequently Asked Questions (FAQ)</h4>
 
-       
+                <div id="faqContainer">
+                    <?php
+                    $faqs = isset($visa->faq) ? json_decode($visa->faq, true) : [];
 
-               
+                    if (!empty($faqs)):
+                        foreach ($faqs as $faq):
+                    ?>
+                            <div class="faqItem border p-3 mb-3">
+                                <label>Question</label>
+                                <textarea name="faq_question[]" class="form-control mb-2"><?= isset($faq['question']) ? $faq['question'] : '' ?></textarea>
 
+                                <label>Answer</label>
+                                <textarea name="faq_answer[]" class="form-control mb-2"><?= isset($faq['answer']) ? $faq['answer'] : '' ?></textarea>
 
-<hr>
-<h4>Frequently Asked Questions (FAQ)</h4>
+                                <button type="button" class="btn btn-danger removeFaq">Remove</button>
+                            </div>
+                    <?php
+                        endforeach;
+                    else:
+                    ?>
+                        <div class="faqItem border p-3 mb-3">
+                            <label>Question</label>
+                            <textarea name="faq_question[]" class="form-control mb-2"></textarea>
 
-<div id="faqContainer">
-    <?php
-    $faqs = isset($visa->faq) ? json_decode($visa->faq, true) : [];
+                            <label>Answer</label>
+                            <textarea name="faq_answer[]" class="form-control mb-2"></textarea>
 
-    if (!empty($faqs)):
-        foreach ($faqs as $faq):
-    ?>
-            <div class="faqItem border p-3 mb-3">
-                <label>Question</label>
-                <textarea name="faq_question[]" class="form-control mb-2"><?= isset($faq['question']) ? $faq['question'] : '' ?></textarea>
-
-                <label>Answer</label>
-                <textarea name="faq_answer[]" class="form-control mb-2"><?= isset($faq['answer']) ? $faq['answer'] : '' ?></textarea>
-
-                <button type="button" class="btn btn-danger removeFaq">Remove</button>
+                            <button type="button" class="btn btn-danger removeFaq">Remove</button>
+                        </div>
+                    <?php endif; ?>
+                </div>
+              <div class = "row">
+                  <div class="col-md-6 mb-3">
+                    <input type="checkbox" name="status" value="1" <?= $visa->status == 1 ? 'checked' : ''; ?> id="statusCheckbox">
+                    <label for="statusCheckbox"> Active</label>
+                </div>
+                 <div class="col-md-6 mb-3">
+                    <input type="checkbox" name="popular" value="1" <?= $visa->popular == 1 ? 'checked' : ''; ?> id="popularCheckbox">
+                    <label for="popularCheckbox"> Popular</label>
+                </div>
+              </div>
+                <button type="button" id="addFaq" class="btn btn-primary mb-3">+ Add FAQ</button>
             </div>
-    <?php
-        endforeach;
-    else:
-    ?>
-        <div class="faqItem border p-3 mb-3">
-            <label>Question</label>
-            <textarea name="faq_question[]" class="form-control mb-2"></textarea>
-
-            <label>Answer</label>
-            <textarea name="faq_answer[]" class="form-control mb-2"></textarea>
-
-            <button type="button" class="btn btn-danger removeFaq">Remove</button>
-        </div>
-    <?php endif; ?>
-</div>
-
-<button type="button" id="addFaq" class="btn btn-primary mb-3">+ Add FAQ</button>
-
-
-
-
-
-            </div>
-
             <button type="submit" class="btn btn-primary">Update</button>
             <a href="<?= base_url('admin/visadetails'); ?>" class="btn btn-secondary">Back</a>
-
         </form>
-
     </div>
 </div>
 

@@ -62,6 +62,9 @@ class VisaDetails extends CI_Controller {
             }
         }
 
+        $status = isset($post['status']) ? 1 : 0;
+         $popular = isset($post['popular']) ? 1 : 0;
+
         $data = [
             'country_name' => $post['country_name'],
             'slug'              => $slug,
@@ -73,7 +76,9 @@ class VisaDetails extends CI_Controller {
             'document_requirement' => $post['document_requirement'],
             'additional_requirement' => $post['additional_requirement'],
             'important_note' => $post['important_note'],
-            'faq' => json_encode($faqs)
+            'faq' => json_encode($faqs),
+            'status' => $status,
+            'popular' => $popular
         ];
 
         $this->Visa_model->insert($data);
@@ -110,6 +115,8 @@ class VisaDetails extends CI_Controller {
                 ];
             }
         }
+         $status = isset($post['status']) ? 1 : 0;
+         $popular = isset($post['popular']) ? 1 : 0;
 
         $data = [
             'country_name' => $post['country_name'],
@@ -121,7 +128,10 @@ class VisaDetails extends CI_Controller {
             'document_requirement' => $post['document_requirement'],
             'additional_requirement' => $post['additional_requirement'],
             'important_note' => $post['important_note'],
-            'faq' => json_encode($faqs)
+            'faq' => json_encode($faqs),
+            'status' => $status,
+            'popular' => $popular
+
         ];
 
         $this->Visa_model->update($id, $data);
