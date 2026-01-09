@@ -157,31 +157,31 @@
     <div class="row">
 
 
-
+<!-- 
         <div class="col-md-4 mb-3">
             <label class="form-label">Language</label>
-            <?php
-            $selected_lang = [];
-            if (!empty($package->language)) {
-                if (is_string($package->language)) {
-                    $selected_lang = json_decode($package->language, true);
-                    if (!is_array($selected_lang)) {
-                        $selected_lang = [];
-                    }
-                }
-                elseif (is_array($package->language)) {
-                    $selected_lang = $package->language;
-                }
-            }
+            <?php 
+               // $selected_lang = [];
+            // if (!empty($package->language)) {
+            //     if (is_string($package->language)) {
+            //         $selected_lang = json_decode($package->language, true);
+            //         if (!is_array($selected_lang)) {
+            //             $selected_lang = [];
+            //         }
+            //     }
+            //     elseif (is_array($package->language)) {
+            //         $selected_lang = $package->language;
+            //     }
+            // }
             ?>
             <select name="language[]" class="form-select select2" multiple>
-                <option value="English" <?= in_array("English", $selected_lang) ? "selected" : "" ?>>English</option>
-                <option value="Spanish" <?= in_array("Spanish", $selected_lang) ? "selected" : "" ?>>Spanish</option>
-                <option value="French" <?= in_array("French", $selected_lang) ? "selected" : "" ?>>French</option>
-                <option value="German" <?= in_array("German", $selected_lang) ? "selected" : "" ?>>German</option>
+                <option value="English" <? // = in_array("English", $selected_lang) ? "selected" : "" ?>>English</option>
+                <option value="Spanish" <? // = in_array("Spanish", $selected_lang) ? "selected" : "" ?>>Spanish</option>
+                <option value="French"  <? // = in_array("French", $selected_lang) ? "selected" : "" ?>>French</option>
+                <option value="German"  <? // = in_array("German", $selected_lang) ? "selected" : "" ?>>German</option>
             </select>
         </div>
-    
+     -->
     <div class="col-md-4 mb-3">
             <label class="form-label">Tour Type</label>
             <?php

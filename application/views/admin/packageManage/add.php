@@ -122,7 +122,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-4 mb-3">
+    <!-- <div class="col-md-4 mb-3">
         <label class="form-label">Language</label>
         <select name="language[]" class="form-select select2" multiple>
             <option value="English">English</option>
@@ -130,7 +130,7 @@
             <option value="French">French</option>
             <option value="German">German</option>
         </select>
-    </div>
+    </div> -->
 
          <div class="col-md-4 mb-3">
         <label class="form-label">Tour Type <span class="text-danger"></span></label>

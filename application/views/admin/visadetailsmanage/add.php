@@ -72,6 +72,11 @@
                     <button type="button" class="btn btn-danger removeFaq">Remove</button>
                 </div>
 
+            
+            </div>
+            <button type="button" id="addFaq" class="btn btn-primary mb-3">+ Add FAQ</button>
+            </div>
+
                 <div class = "row">
                     <div class= "col-md-6 mb-3">
                     <input type="checkbox" name="status" value="1" id="statusCheckbox">
@@ -83,9 +88,6 @@
                     <label for="popularCheckbox"> Popular</label>
                     </div>
                 </div>
-            </div>
-            <button type="button" id="addFaq" class="btn btn-primary mb-3">+ Add FAQ</button>
-            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
             <a href="<?= base_url('admin/visadetails'); ?>" class="btn btn-secondary">Back</a>
 

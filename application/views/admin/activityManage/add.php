@@ -78,7 +78,7 @@
 
     <div class="mb-3">
         <label class="form-label">Meta Description</label>
-        <textarea name="meta_description" id="meta_description" class="form-control" rows="4"><?php echo set_value('meta_description'); ?></textarea>
+        <textarea name="meta_description" id="meta_description" class="form-control"><?php echo set_value('meta_description'); ?></textarea>
     </div>
 
     <div class="row">
@@ -91,111 +91,6 @@
             <input type="file" name="image" class="form-control">
         </div>
     </div>
-
-
-    <div class="row">
-
-    <div class="col-md-4 mb-3">
-        <label class="form-label">Accommodation <span class="text-danger"></span></label>
-        <select name="accommodation" class="form-select" >
-            <option value="">Select Accommodation</option>
-            <option value="5 Star Hotel">5 Star Hotel</option>
-            <option value="4 Star Hotel">4 Star Hotel</option>
-            <option value="Resort">Resort</option>
-            <option value="Villa">Villa</option>
-        </select>
-    </div>
-
-    <div class="col-md-4 mb-3">
-        <label class="form-label">Meals</label>
-        <select name="meals" class="form-select">
-            <option value="">Select Meal Plan</option>
-            <option value="Breakfast Only">Breakfast Only</option>
-            <option value="Breakfast & Dinner">Breakfast & Dinner</option>
-            <option value="All Meals">All Meals</option>
-        </select>
-    </div>
-
-    <div class="col-md-4 mb-3">
-        <label class="form-label">Transportation</label>
-        <select name="transportation" class="form-select">
-            <option value="">Select Transportation</option>
-            <option value="Taxi">Taxi</option>
-            <option value="Car">Car</option>
-            <option value="Bus">Bus</option>
-        </select>
-    </div>
-
-</div>
-
-<div class="row">
-
-    <div class="col-md-4 mb-3">
-        <label class="form-label">Group Size</label>
-        <select name="group_size" class="form-select">
-            <option value="">Select Group Size</option>
-            <option value="1-10">1–10</option>
-            <option value="10-20">10–20</option>
-            <option value="20-40">20–40</option>
-        </select>
-    </div>
-
-    <div class="col-md-4 mb-3">
-        <label class="form-label">Language</label>
-        <select name="language[]" class="form-select select2" multiple>
-            <option value="English">English</option>
-            <option value="Spanish">Spanish</option>
-            <option value="French">French</option>
-            <option value="German">German</option>
-        </select>
-    </div>
-
-    <div class="col-md-4 mb-3">
-        <label class="form-label">Animal</label>
-        <select name="animal" class="form-select">
-            <option value="">Select Animal</option>
-            <option value="Cat">Cat</option>
-            <option value="Dog">Dog</option>
-            <option value="Pet Only">Pet Only</option>
-        </select>
-    </div>
-
-</div>
-
-<div class="row">
-
-    <div class="col-md-4 mb-3">
-        <label class="form-label">Age Range</label>
-        <select name="age_range" class="form-select">
-            <option value="">Select Age Range</option>
-            <option value="18-45">18–45</option>
-            <option value="18-55">18–55</option>
-            <option value="All Ages">All Ages</option>
-        </select>
-    </div>
-
-    <div class="col-md-4 mb-3">
-        <label class="form-label">Season</label>
-        <select name="season" class="form-select">
-            <option value="">Select Season</option>
-            <option value="Winter Season">Winter Season</option>
-            <option value="Summer Season">Summer Season</option>
-            <option value="Rainy Season">Rainy Season</option>
-        </select>
-    </div>
-
-    <div class="col-md-4 mb-3">
-        <label class="form-label">Activity Type <span class="text-danger"></span></label>
-        <select name="activity_type" class="form-select" >
-            <option value="">Select Category</option>
-            <option value="Adventure">Adventure</option>
-            <option value="Family">Family</option>
-            <option value="Honeymoon">Honeymoon</option>
-            <option value="Luxury">Luxury</option>
-        </select>
-    </div>
-
-</div>
   <div class="row">
     <div class="col-md-6 mb-3 form-check">
         <input type="checkbox" name="status" class="form-check-input" id="status" value="1" <?php echo set_checkbox('status','1'); ?>>

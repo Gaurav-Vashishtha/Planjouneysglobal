@@ -59,7 +59,7 @@ public function create() {
 
     $slug = $this->Package_model->make_unique_slug($post['title']);
 
-    $languages = !empty($post['language']) ? json_encode($post['language']) : json_encode([]);
+    // $languages = !empty($post['language']) ? json_encode($post['language']) : json_encode([]);
     $tour_types = !empty($post['tour_type']) ? json_encode($post['tour_type']) : json_encode([]);
     $accommodations = !empty($post['accommodation']) ? json_encode($post['accommodation']) : json_encode([]);
   
@@ -84,7 +84,7 @@ public function create() {
         'meals'             => $post['meals'] ?? null,
         'transportation'    => $post['transportation'] ?? null,
         // 'group_size'        => $post['group_size'] ?? null,
-        'language'          => $languages,
+        // 'language'          => $languages,
         // 'animal'            => $post['animal'] ?? null,
         // 'age_range'         => $post['age_range'] ?? null,
         // 'season'            => $post['season'] ?? null,
@@ -158,7 +158,7 @@ public function edit($id = null)
     if (!$package) show_404();
 
 
-    $package->language = !empty($package->language) ? json_decode($package->language, true) : [];
+    // $package->language = !empty($package->language) ? json_decode($package->language, true) : [];
 
 
     $this->form_validation->set_rules('title', 'Title', 'required');
@@ -179,7 +179,7 @@ public function edit($id = null)
     $new_title = trim($post['title']);
      $slug = ($package->title !== $post['title']) ? $this->Package_model->make_unique_slug($post['title']) : $package->slug;
 
-    $languages = !empty($post['language']) ? json_encode($post['language']) : json_encode([]);
+    // $languages = !empty($post['language']) ? json_encode($post['language']) : json_encode([]);
     $tour_types = !empty($post['tour_type']) ? json_encode($post['tour_type']) : json_encode([]);
     $accommodations = !empty($post['accommodation']) ? json_encode($post['accommodation']) : json_encode([]);
    
@@ -202,7 +202,7 @@ public function edit($id = null)
         'meals'             => $post['meals'] ?? null,
         'transportation'    => $post['transportation'] ?? null,
         // 'group_size'        => $post['group_size'] ?? null,
-        'language'          => $languages,
+        // 'language'          => $languages,
         // 'animal'            => $post['animal'] ?? null,
         // 'age_range'         => $post['age_range'] ?? null,
         // 'season'            => $post['season'] ?? null,

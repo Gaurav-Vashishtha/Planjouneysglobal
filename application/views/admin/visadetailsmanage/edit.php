@@ -98,7 +98,11 @@
                         </div>
                     <?php endif; ?>
                 </div>
-              <div class = "row">
+        
+                <button type="button" id="addFaq" class="btn btn-primary mb-3">+ Add FAQ</button>
+            </div>
+
+            <div class = "row">
                   <div class="col-md-6 mb-3">
                     <input type="checkbox" name="status" value="1" <?= $visa->status == 1 ? 'checked' : ''; ?> id="statusCheckbox">
                     <label for="statusCheckbox"> Active</label>
@@ -106,10 +110,8 @@
                  <div class="col-md-6 mb-3">
                     <input type="checkbox" name="popular" value="1" <?= $visa->popular == 1 ? 'checked' : ''; ?> id="popularCheckbox">
                     <label for="popularCheckbox"> Popular</label>
-                </div>
+                 </div>
               </div>
-                <button type="button" id="addFaq" class="btn btn-primary mb-3">+ Add FAQ</button>
-            </div>
             <button type="submit" class="btn btn-primary">Update</button>
             <a href="<?= base_url('admin/visadetails'); ?>" class="btn btn-secondary">Back</a>
         </form>

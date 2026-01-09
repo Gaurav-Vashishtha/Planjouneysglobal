@@ -80,7 +80,7 @@
 
     <div class="mb-3">
         <label class="form-label">Meta Description</label>
-        <textarea name="meta_description" id="meta_description" class="form-control" rows="4"><?= $activities->meta_description; ?></textarea>
+        <textarea name="meta_description" id="meta_description" class="form-control"><?= $activities->meta_description; ?></textarea>
     </div>
 
     <div class="row">
@@ -97,130 +97,7 @@
             <?php endif; ?>
         </div>
     </div>
-
-    <div class="row">
-
-        <div class="col-md-4 mb-3">
-            <label class="form-label">Accommodation</label>
-            <select name="accommodation" class="form-select">
-                <option value="">Select</option>
-                <option <?= ($activities->accommodation == "5 Star Hotel") ? "selected" : "" ?>>5 Star Hotel</option>
-                <option <?= ($activities->accommodation == "4 Star Hotel") ? "selected" : "" ?>>4 Star Hotel</option>
-                <option <?= ($activities->accommodation == "Resort") ? "selected" : "" ?>>Resort</option>
-                <option <?= ($activities->accommodation == "Villa") ? "selected" : "" ?>>Villa</option>
-            </select>
-        </div>
-
-        <div class="col-md-4 mb-3">
-            <label class="form-label">Meals</label>
-            <select name="meals" class="form-select">
-                <option value="">Select</option>
-                <option <?= ($activities->meals == "Breakfast Only") ? "selected" : "" ?>>Breakfast Only</option>
-                <option <?= ($activities->meals == "Breakfast & Dinner") ? "selected" : "" ?>>Breakfast & Dinner</option>
-                <option <?= ($activities->meals == "All Meals") ? "selected" : "" ?>>All Meals</option>
-            </select>
-        </div>
-
-        <div class="col-md-4 mb-3">
-            <label class="form-label">Transportation</label>
-            <select name="transportation" class="form-select">
-                <option value="">Select</option>
-                <option <?= ($activities->transportation == "Taxi") ? "selected" : "" ?>>Taxi</option>
-                <option <?= ($activities->transportation == "Car") ? "selected" : "" ?>>Car</option>
-                <option <?= ($activities->transportation == "Bus") ? "selected" : "" ?>>Bus</option>
-            </select>
-        </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-md-4 mb-3">
-            <label class="form-label">Group Size</label>
-            <select name="group_size" class="form-select">
-                <option value="">Select</option>
-                <option <?= ($activities->group_size == "1-10") ? "selected" : "" ?>>1-10</option>
-                <option <?= ($activities->group_size == "10-20") ? "selected" : "" ?>>10-20</option>
-                <option <?= ($activities->group_size == "20-40") ? "selected" : "" ?>>20-40</option>
-            </select>
-        </div>
-
-        <div class="col-md-4 mb-3">
-            <label class="form-label">Language</label>
-            <?php
-            $selected_lang = [];
-            if (!empty($activities->language)) {
-                if (is_string($activities->language)) {
-                    $selected_lang = json_decode($activities->language, true);
-                    if (!is_array($selected_lang)) {
-                        $selected_lang = [];
-                    }
-                }
-                elseif (is_array($activities->language)) {
-                    $selected_lang = $activities->language;
-                }
-            }
-            ?>
-            <select name="language[]" class="form-select select2" multiple>
-                <option value="English" <?= in_array("English", $selected_lang) ? "selected" : "" ?>>English</option>
-                <option value="Spanish" <?= in_array("Spanish", $selected_lang) ? "selected" : "" ?>>Spanish</option>
-                <option value="French" <?= in_array("French", $selected_lang) ? "selected" : "" ?>>French</option>
-                <option value="German" <?= in_array("German", $selected_lang) ? "selected" : "" ?>>German</option>
-            </select>
-        </div>
-
-
-
-        <div class="col-md-4 mb-3">
-            <label class="form-label">Animal</label>
-            <select name="animal" class="form-select">
-                <option value="">Select</option>
-                <option <?= ($activities->animal == "Cat") ? "selected" : "" ?>>Cat</option>
-                <option <?= ($activities->animal == "Dog") ? "selected" : "" ?>>Dog</option>
-                <option <?= ($activities->animal == "Pet Only") ? "selected" : "" ?>>Pet Only</option>
-            </select>
-        </div>
-
-    </div>
-
-    <div class="row">
-
-
-        <div class="col-md-4 mb-3">
-            <label class="form-label">Age Range</label>
-            <select name="age_range" class="form-select">
-                <option value="">Select</option>
-                <option <?= ($activities->age_range == "18-45") ? "selected" : "" ?>>18-45</option>
-                <option <?= ($activities->age_range == "18-55") ? "selected" : "" ?>>18-55</option>
-                <option <?= ($activities->age_range == "All Ages") ? "selected" : "" ?>>All Ages</option>
-            </select>
-        </div>
-
-
-        <div class="col-md-4 mb-3">
-            <label class="form-label">Season</label>
-            <select name="season" class="form-select">
-                <option value="">Select</option>
-                <option <?= ($activities->season == "Winter Season") ? "selected" : "" ?>>Winter Season</option>
-                <option <?= ($activities->season == "Summer Season") ? "selected" : "" ?>>Summer Season</option>
-                <option <?= ($activities->season == "Rainy Season") ? "selected" : "" ?>>Rainy Season</option>
-            </select>
-        </div>
-
-        <div class="col-md-4 mb-3">
-    <label class="form-label">Activity Type</label>
-    <select name="activity_type" class="form-select">
-        <option value="">Select</option>
-        <option value="Adventure" <?= ($activities->activity_type == "Adventure") ? "selected" : "" ?>>Adventure</option>
-        <option value="Family" <?= ($activities->activity_type == "Family") ? "selected" : "" ?>>Family</option>
-        <option value="Honeymoon" <?= ($activities->activity_type == "Honeymoon") ? "selected" : "" ?>>Honeymoon</option>
-        <option value="Luxury" <?= ($activities->activity_type == "Luxury") ? "selected" : "" ?>>Luxury</option>
-    </select>
-</div>
-
-
-    </div>
-
+    
  <div class="row">
     <div class="col-md-6 mb-3 form-check">
         <input type="checkbox" name="status" value="1" class="form-check-input" <?= ($activities->status == 1) ? "checked" : "" ?>>

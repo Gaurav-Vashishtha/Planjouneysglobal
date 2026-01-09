@@ -62,7 +62,7 @@ public function create() {
 
     $slug = $this->Activity_model->make_unique_slug($post['title']);
 
-    $languages = !empty($post['language']) ? json_encode($post['language']) : json_encode([]);
+    // $languages = !empty($post['language']) ? json_encode($post['language']) : json_encode([]);
 
     $activity_category_id = $post['category_activity'] ?? null;
     $activity_category_name = null;
@@ -107,15 +107,15 @@ public function create() {
         'meta_title'        => $post['meta_title'] ?? null,
         'meta_description'  => $post['meta_description'] ?? null,
         'price'             => $post['price'] ?? 0,
-        'accommodation'     => $post['accommodation'] ?? null,
-        'meals'             => $post['meals'] ?? null,
-        'transportation'    => $post['transportation'] ?? null,
-        'group_size'        => $post['group_size'] ?? null,
-        'language'          => $languages,
-        'animal'            => $post['animal'] ?? null,
-        'age_range'         => $post['age_range'] ?? null,
-        'season'            => $post['season'] ?? null,
-        'activity_type'         => $post['activity_type'] ?? null,
+        // 'accommodation'     => $post['accommodation'] ?? null,
+        // 'meals'             => $post['meals'] ?? null,
+        // 'transportation'    => $post['transportation'] ?? null,
+        // 'group_size'        => $post['group_size'] ?? null,
+        // 'language'          => $languages,
+        // 'animal'            => $post['animal'] ?? null,
+        // 'age_range'         => $post['age_range'] ?? null,
+        // 'season'            => $post['season'] ?? null,
+        // 'activity_type'         => $post['activity_type'] ?? null,
         'highlights_of_activity' => $post['highlights_of_activity'] ?? null,
         'additional_info' => $post['additional_info'] ?? null,
         'inclusion'         => $post['inclusion'] ?? null,
@@ -181,7 +181,7 @@ public function edit($id = null)
 
     $post = $this->input->post(NULL, TRUE);
 
-    $languages = !empty($post['language']) ? json_encode($post['language']) : json_encode([]);
+    // $languages = !empty($post['language']) ? json_encode($post['language']) : json_encode([]);
    
    $activity_category_id = $post['category_activity'] ?? null;
     $activity_category_name = null;
@@ -222,15 +222,15 @@ public function edit($id = null)
         'meta_title'        => $post['meta_title'] ?? null,
         'meta_description'  => $post['meta_description'] ?? null,
         'price'             => $post['price'] ?? 0,
-        'accommodation'     => $post['accommodation'] ?? null,
-        'meals'             => $post['meals'] ?? null,
-        'transportation'    => $post['transportation'] ?? null,
-        'group_size'        => $post['group_size'] ?? null,
-        'language'          => $languages,
-        'animal'            => $post['animal'] ?? null,
-        'age_range'         => $post['age_range'] ?? null,
-        'season'            => $post['season'] ?? null,
-        'activity_type'         => $post['activity_type'] ?? null,
+        // 'accommodation'     => $post['accommodation'] ?? null,
+        // 'meals'             => $post['meals'] ?? null,
+        // 'transportation'    => $post['transportation'] ?? null,
+        // 'group_size'        => $post['group_size'] ?? null,
+        // 'language'          => $languages,
+        // 'animal'            => $post['animal'] ?? null,
+        // 'age_range'         => $post['age_range'] ?? null,
+        // 'season'            => $post['season'] ?? null,
+        // 'activity_type'         => $post['activity_type'] ?? null,
         'highlights_of_activity' => $post['highlights_of_activity'] ?? null,
         'additional_info' => $post['additional_info'] ?? null,
         'inclusion'         => $post['inclusion'] ?? null,
