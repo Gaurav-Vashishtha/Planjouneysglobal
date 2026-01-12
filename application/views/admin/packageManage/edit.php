@@ -73,8 +73,8 @@
         <textarea name="meta_description" id="meta_description" class="form-control" rows=""><?= $package->meta_description; ?></textarea>
     </div>
       <div class="mb-3">
-        <label class="form-label">Meta Description</label>
-        <textarea name="meta_description" id="meta_description" class="form-control" rows=""><?= $package->meta_description; ?></textarea>
+        <label class="form-label">Meta Keyword</label>
+        <textarea name="meta_keyword" id="meta_keyword" class="form-control" rows=""><?= $package->meta_keyword; ?></textarea>
     </div>
 
     <div class="row">
@@ -83,9 +83,6 @@
             <label class="form-label">Price</label>
             <input type="number" step="0.01" name="price" class="form-control" value="<?= $package->price; ?>">
         </div>
-
-
-
 
         <div class="col-md-4 mb-3">
             <label class="form-label">Image <small>(Max size: 2 MB , 1800*900)</small></label>
@@ -104,118 +101,99 @@
         </div>
     </div>
 
-
-    <div class="row">
-
-  <div class="col-md-4 mb-3">
-            <label class="form-label">Accommodation</label>
+ <div class="row">
+    <div class="col-md-4 mb-3">
+        <label class="form-label">Accommodation <span class="text-danger"></span></label>
+        <?php
+            $selected_acc = !empty($package->accommodation) ? json_decode($package->accommodation, true) : [];
+            $accommodationOption = ['5 Star Hotel', '4 Star Hotel', '3 Star Hotel', 'Resort', 'Villa'];
+        ?>
+        <select name="accommodation[]" class="form-select select2 custom-form-select" multiple>
             <?php
-            $selected_acc = [];
-            if (!empty($package->accommodation)) {
-                if (is_string($package->accommodation)) {
-                    $selected_acc = json_decode($package->accommodation, true);
-                    if (!is_array($selected_acc)) {
-                        $selected_acc = [];
-                    }
+                foreach ($accommodationOption as $option) {
+                    $selected = in_array($option, $selected_acc) ? "selected" : "";
+                    echo "<option value=\"$option\" $selected>$option</option>";
                 }
-                elseif (is_array($package->accommodation)) {
-                    $selected_acc = $package->accommodation;
+                $new_accommodations = array_diff($selected_acc, $accommodationOption);
+                foreach ($new_accommodations as $new_option) {
+                    echo "<option value=\"$new_option\" selected>$new_option</option>";
                 }
-            }
             ?>
-            <select name="accommodation[]" class="form-select select2" multiple>
-                <option value="5 Star Hotel" <?= in_array("5 Star Hotel", $selected_acc) ? "selected" : "" ?>>5 Star Hotel</option>
-                <option value="4 Star Hotel" <?= in_array("4 Star Hotel", $selected_acc) ? "selected" : "" ?>>4 Star Hotel</option>
-                <option value="3 Star Hotel" <?= in_array("3 Star Hotel", $selected_acc) ? "selected" : "" ?>>3 Star Hotel</option>
-                <option value="Resort" <?= in_array("Resort", $selected_acc) ? "selected" : "" ?>>Resort</option>
-                <option value="Villa" <?= in_array("Villa", $selected_acc) ? "selected" : "" ?>>Villa</option>
-            </select>
-        </div>
-
-        <div class="col-md-4 mb-3">
-            <label class="form-label">Meals</label>
-            <select name="meals" class="form-select">
-                <option value="">Select</option>
-                <option <?= ($package->meals == "Breakfast Only") ? "selected" : "" ?>>Breakfast Only</option>
-                <option <?= ($package->meals == "Breakfast & Dinner") ? "selected" : "" ?>>Breakfast & Dinner</option>
-                <option <?= ($package->meals == "All Meals") ? "selected" : "" ?>>All Meals</option>
-            </select>
-        </div>
-
-        <div class="col-md-4 mb-3">
-            <label class="form-label">Transportation</label>
-            <select name="transportation" class="form-select">
-                <option value="">Select</option>
-                <option <?= ($package->transportation == "Taxi") ? "selected" : "" ?>>Taxi</option>
-                <option <?= ($package->transportation == "Car") ? "selected" : "" ?>>Car</option>
-                <option <?= ($package->transportation == "Bus") ? "selected" : "" ?>>Bus</option>
-            </select>
-        </div>
-
+        </select>
     </div>
 
-    <div class="row">
-
-
-<!-- 
-        <div class="col-md-4 mb-3">
-            <label class="form-label">Language</label>
-            <?php 
-               // $selected_lang = [];
-            // if (!empty($package->language)) {
-            //     if (is_string($package->language)) {
-            //         $selected_lang = json_decode($package->language, true);
-            //         if (!is_array($selected_lang)) {
-            //             $selected_lang = [];
-            //         }
-            //     }
-            //     elseif (is_array($package->language)) {
-            //         $selected_lang = $package->language;
-            //     }
-            // }
-            ?>
-            <select name="language[]" class="form-select select2" multiple>
-                <option value="English" <? // = in_array("English", $selected_lang) ? "selected" : "" ?>>English</option>
-                <option value="Spanish" <? // = in_array("Spanish", $selected_lang) ? "selected" : "" ?>>Spanish</option>
-                <option value="French"  <? // = in_array("French", $selected_lang) ? "selected" : "" ?>>French</option>
-                <option value="German"  <? // = in_array("German", $selected_lang) ? "selected" : "" ?>>German</option>
-            </select>
-        </div>
-     -->
     <div class="col-md-4 mb-3">
-            <label class="form-label">Tour Type</label>
+        <label class="form-label">Meals</label>
+        <?php
+            $selected_meal[] = !empty($package->meals) ? $package->meals : ''; 
+            $mealOptions = ['Breakfast Only', 'Breakfast & Dinner', 'All Meals'];
+        ?>
+
+        <select name="meals" class="form-select select2 custom-form-select">
+            <option value="">Select Meal Plan</option>
             <?php
-            $selected_tour = [];
-            if (!empty($package->tour_type)) {
-                if (is_string($package->tour_type)) {
-                    $selected_tour = json_decode($package->tour_type, true);
-                    if (!is_array($selected_tour)) {
-                        $selected_tour = [];
-                    }
+                foreach ($mealOptions as $option) {
+                    $selected = in_array($option, $selected_meal) ? "selected" : "";
+                    echo "<option value=\"$option\" $selected>$option</option>";
                 }
-                elseif (is_array($package->tour_type)) {
-                    $selected_tour = $package->tour_type;
+                $new_meals = array_diff($selected_meal, $mealOptions);
+                foreach ($new_meals as $new_option) {
+                    echo "<option value=\"$new_option\" selected>$new_option</option>";
                 }
-            }
             ?>
-            <select name="tour_type[]" class="form-select select2" multiple>
-                <option value="Adventure" <?= in_array("Adventure", $selected_tour) ? "selected" : "" ?>>Adventure</option>
-                <option value="Family" <?= in_array("Family", $selected_tour) ? "selected" : "" ?>>Family</option>
-                <option value="Honeymoon" <?= in_array("Honeymoon", $selected_tour) ? "selected" : "" ?>>Honeymoon</option>
-                <option value="Luxury" <?= in_array("Luxury", $selected_tour) ? "selected" : "" ?>>Luxury</option>
-                <option value="Solo" <?= in_array("Solo", $selected_tour) ? "selected" : "" ?>>Solo</option>
-                <option value="Group" <?= in_array("Group", $selected_tour) ? "selected" : "" ?>>Group</option>
+        </select>
+    </div>
+
+   <div class="col-md-4 mb-3">
+    <label class="form-label">Transportation</label>
+    <?php
+        $selected_transportation = !empty($package->transportation) ? (array)$package->transportation : []; 
+        $transportationOptions = ['Taxi', 'Car', 'Bus'];
+    ?>
+
+    <select name="transportation" class="form-select select2 custom-form-select">
+        <option value="">Select Transportation</option>
+        <?php
+            foreach ($transportationOptions as $option) {
+                $selected = in_array($option, $selected_transportation) ? "selected" : "";
+                echo "<option value=\"$option\" $selected>$option</option>";
+            }
+            $new_transportations = array_diff($selected_transportation, $transportationOptions);
+            foreach ($new_transportations as $new_option) {
+                echo "<option value=\"$new_option\" selected>$new_option</option>";
+            }
+        ?>
+    </select>
+</div>
+
+ </div>
+
+   <div class="row">
+        <div class="col-md-4 mb-3">
+            <label class="form-label">Tour Type <span class="text-danger"></span></label>
+            <?php
+                $selected_tour = !empty($package->tour_type) ? json_decode($package->tour_type, true) : [];
+                $tourTypeOptions = ['Adventure', 'Family', 'Honeymoon', 'Luxury', 'Solo', 'Group'];
+            ?>
+            <select name="tour_type[]" class="form-select select2 custom-form-select" multiple>
+                <?php
+                    foreach ($tourTypeOptions as $option) {
+                        $selected = in_array($option, $selected_tour) ? "selected" : "";
+                        echo "<option value=\"$option\" $selected>$option</option>";
+                    }
+                    $new_tour_types = array_diff($selected_tour, $tourTypeOptions);
+                    foreach ($new_tour_types as $new_option) {
+                        echo "<option value=\"$new_option\" selected>$new_option</option>";
+                    }
+                ?>
             </select>
         </div>
-
-        
         <div class="col-md-4 mb-3">
             <label class="form-label">Duration</label>
             <input type="text" name="duration" class="form-control" value="<?= $package->duration; ?>">
         </div>
 
-
-</div>
+    </div>
 
 
     <div class="mb-3 form-check">
@@ -268,6 +246,8 @@
 
 <?= form_close(); ?>
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -365,5 +345,72 @@ $(document).ready(function() {
     }
 
 });
+
+
 </script>
 
+
+<script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            tags: true, 
+            tokenSeparators: [',', ' '], 
+            placeholder: 'Select or type an option'  
+        });
+    });
+</script>
+
+
+<style>
+.steps-links a {
+    margin-left: 5px;
+    text-decoration: none;
+    color: #0d6efd;
+    font-weight: 600;
+}
+.steps-links a.active { text-decoration: underline; }
+.steps-links a.disabled { color: #aaa; pointer-events: none; }
+.step-card {
+    border-radius: 12px;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+.ck-editor__editable_inline {
+    min-height: 120px !important;
+}
+
+.select2-container .select2-selection--single {
+    height: calc(2.25rem + 2px);  
+    padding: 0.375rem 0.75rem;   
+}
+
+.select2-container--default .select2-selection--multiple {
+    min-height: calc(2.25rem + 2px);
+    padding: 0.375rem 0.75rem;      
+}
+
+.select2-container .select2-selection__rendered {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 26px;
+    position: absolute;
+    top: 6px;
+    right: 3px;
+    width: 20px;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #444;
+    line-height: 28px;
+    margin-top: -2px;
+    margin-left: -10px;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    margin-left: 0px;
+    margin-top: -1px;
+
+}
+</style>

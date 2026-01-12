@@ -84,23 +84,21 @@
         </div>
     </div>
 
-
-    <div class="row">
-
-        <div class="col-md-4 mb-3">
+<div class="row">
+    <div class="col-md-4 mb-3">
         <label class="form-label">Accommodation <span class="text-danger"></span></label>
-        <select name="accommodation[]" class="form-select select2" multiple>
+        <select name="accommodation[]" class="form-select select2 custom-form-select" multiple>
             <option value="5 Star Hotel">5 Star Hotel</option>
             <option value="4 Star Hotel">4 Star Hotel</option>
             <option value="3 Star Hotel">3 Star Hotel</option>
             <option value="Resort">Resort</option>
             <option value="Villa">Villa</option>
         </select>
-        </div>
+    </div>
 
     <div class="col-md-4 mb-3">
         <label class="form-label">Meals</label>
-        <select name="meals" class="form-select">
+        <select name="meals" class="form-select select2 custom-form-select">
             <option value="">Select Meal Plan</option>
             <option value="Breakfast Only">Breakfast Only</option>
             <option value="Breakfast & Dinner">Breakfast & Dinner</option>
@@ -108,44 +106,31 @@
         </select>
     </div>
 
-
     <div class="col-md-4 mb-3">
         <label class="form-label">Transportation</label>
-        <select name="transportation" class="form-select">
+        <select name="transportation" class="form-select select2 custom-form-select">
             <option value="">Select Transportation</option>
             <option value="Taxi">Taxi</option>
             <option value="Car">Car</option>
             <option value="Bus">Bus</option>
         </select>
     </div>
-
 </div>
 
 <div class="row">
-    <!-- <div class="col-md-4 mb-3">
-        <label class="form-label">Language</label>
-        <select name="language[]" class="form-select select2" multiple>
-            <option value="English">English</option>
-            <option value="Spanish">Spanish</option>
-            <option value="French">French</option>
-            <option value="German">German</option>
-        </select>
-    </div> -->
-
-         <div class="col-md-4 mb-3">
+    <div class="col-md-4 mb-3">
         <label class="form-label">Tour Type <span class="text-danger"></span></label>
-        <select name="tour_type[]" class="form-select select2" multiple>
+        <select name="tour_type[]" class="form-select select2 custom-form-select" multiple>
             <option value="Adventure">Adventure</option>
             <option value="Family">Family</option>
             <option value="Honeymoon">Honeymoon</option>
             <option value="Luxury">Luxury</option>
             <option value="Solo">Solo</option>
             <option value="Group">Group</option>
-
         </select>
-     </div>
+    </div>
 
-             <div class="col-md-4 mb-3">
+        <div class="col-md-4 mb-3">
             <label class="form-label">Duration</label>
             <input type="text" name="duration" class="form-control" value="<?php echo set_value('duration'); ?>">
         </div>
@@ -153,9 +138,9 @@
 </div>
 
 
-<div class="row mb-3">
+<div class="row">
 
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="form-check">
             <input type="checkbox" name="status" class="form-check-input" id="status"
                    value="1" <?= set_checkbox('status', '1', !empty($activities->status)); ?>>
@@ -163,7 +148,7 @@
         </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-4 ">
         <div class="form-check">
             <input type="checkbox" name="popular" class="form-check-input" id="popular"
                    value="1" <?= set_checkbox('popular', '1', !empty($activities->popular)); ?>>
@@ -229,6 +214,9 @@
 <?php echo form_close(); ?>
 
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -286,10 +274,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-
-$(document).ready(function() {
-    $('.select2').select2();
-});
 </script>
 
 
@@ -321,6 +305,14 @@ $(document).ready(function() {
         });
     }
 });
+
+
+$(document).ready(function() {
+    $('.select2').select2({
+        tags: true
+    });
+});
+
 </script>
 <style>
 .steps-links a {
@@ -339,6 +331,40 @@ $(document).ready(function() {
 }
 .ck-editor__editable_inline {
     min-height: 120px !important;
+}
+
+.select2-container .select2-selection--single {
+    height: calc(2.25rem + 2px);  
+    padding: 0.375rem 0.75rem;   
+}
+
+.select2-container--default .select2-selection--multiple {
+    min-height: calc(2.25rem + 2px);
+    padding: 0.375rem 0.75rem;      
+}
+
+.select2-container .select2-selection__rendered {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 26px;
+    position: absolute;
+    top: 6px;
+    right: 3px;
+    width: 20px;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #444;
+    line-height: 28px;
+    margin-top: -2px;
+    margin-left: -10px;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    margin-left: 0px;
+    margin-top: -1px;
+
 }
 </style>
 

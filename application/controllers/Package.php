@@ -158,8 +158,8 @@ public function edit($id = null)
     if (!$package) show_404();
 
 
-    // $package->language = !empty($package->language) ? json_decode($package->language, true) : [];
-
+    // $package->accommodations = !empty($package->accommodations) ? json_decode($package->accommodations, true) : [];
+    // $package->tour_types = !empty($package->tour_types) ? json_decode($package->tour_types, true) : [];
 
     $this->form_validation->set_rules('title', 'Title', 'required');
     $this->form_validation->set_rules('category', 'Category', 'required');
