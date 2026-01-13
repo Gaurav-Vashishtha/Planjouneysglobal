@@ -349,7 +349,7 @@ public function domestic_honeymoon_packages()
         ->set_output(json_encode($response));
 }
 
-public function get_package_by_location($location_id = null)
+public function get_package_by_location($location_id = null, $exclude_package_id = null)
 {
     if (empty($location_id)) {
         return $this->output
@@ -360,8 +360,23 @@ public function get_package_by_location($location_id = null)
             ]));
     }
 
-    $packages = $this->Package_model->get_by_location_id($location_id);
+    $packages = $this->Package_model->get_related_packages($location_id, $exclude_package_id);
+    $rates = $this->get_rates();
 
+        foreach ($packages as &$pkg) {
+
+            if (is_array($pkg)) {
+                $pkg = (object) $pkg;
+            }
+
+
+            $inrPrice = isset($pkg->price) ? (float) $pkg->price : 0;
+
+
+            $pkg->price_inr = $inrPrice;
+            $pkg->price_usd = $inrPrice * $rates['USD'];
+            $pkg->price_aed = $inrPrice * $rates['AED'];
+        }
     if (empty($packages)) {
         return $this->output
             ->set_content_type('application/json')
