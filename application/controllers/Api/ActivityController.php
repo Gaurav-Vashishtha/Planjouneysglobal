@@ -327,5 +327,54 @@ public function get_searched_activities()
     }
 
 
+
+public function get_relevant_activities($location_id = null, $exclude_activity_id = null)
+{
+    $location_id = (int) $location_id;
+    $exclude_activity_id = (int) $exclude_activity_id;
+
+    if ($location_id <= 0) {
+        echo json_encode([
+            'status'  => false,
+            'message' => 'Location ID  is required.'
+        ]);
+        return;
+    }
+    $activities = $this->Activity_model->get_relevant_activities(
+        $location_id,
+        $exclude_activity_id
+    );
+
+     $rates = $this->get_rates();
+
+            foreach ($activities as &$activity) {
+                if (is_array($activity)) {
+                    $activity = (object) $activity;
+                }
+
+                $inrPrice = isset($activity->price) ? (float) $activity->price : 0;
+
+                $activity->price_inr = $inrPrice;
+                $activity->price_usd = $inrPrice * $rates['USD'];
+                $activity->price_aed = $inrPrice * $rates['AED'];
+                $activity->rate_timestamp = $rates['timestamp'];
+            }
+
+    if (empty($activities)) {
+        echo json_encode([
+            'status'  => true,
+            'message' => 'No relevant activities found.',
+            'data'    => []
+        ]);
+        return;
+    }
+
+    echo json_encode([
+        'status' => true,
+        'data'   => $activities
+    ]);
+}
+
+
 }
 ?>

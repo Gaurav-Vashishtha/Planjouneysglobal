@@ -235,6 +235,27 @@ public function get_popular_activities(){
                      ->result_array();
 }
 
+public function get_relevant_activities($location_id = null, $exclude_activity_id = null)
+{
+    $location_id = (int) $location_id;
+    $exclude_activity_id = (int) $exclude_activity_id;
+
+    $this->db->select('title, slug, image, price');
+    $this->db->from('activities');
+    $this->db->where('status', 1);
+
+    if ($location_id > 0) {
+        $this->db->where('location_id', $location_id);
+    }
+
+    if ($exclude_activity_id > 0) {
+        $this->db->where('id !=', $exclude_activity_id);
+    }
+
+    $this->db->order_by('created_at', 'DESC');
+
+    return $this->db->get()->result_array();
+}
 
 
 }

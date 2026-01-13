@@ -35,7 +35,7 @@
 
         <div class="col-md-3 mb-3">
             <label class="form-label">Activity Category <span class="text-danger"></span></label>
-            <select name="category_activity" id="category_activity" class="form-select">
+            <select name="category_id" id="category_id" class="form-select">
                 <option value="">Select Activity Category</option>
                 <?php foreach($activity_categories as $cat): ?>
                     <option value="<?= $cat->id ?>">
@@ -91,6 +91,27 @@
             <input type="file" name="image" class="form-control">
         </div>
     </div>
+
+
+  <h4>Add multiple images</h4>
+    <button type="button" id="addImage" class="btn btn-primary mb-3">+ Add More</button>
+    <div id="galleryContainer">
+        <div class="galleryContainerItem border p-3 mb-3">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label>Name</label>
+                    <input type="text" name="image_name[]" class="form-control">
+                </div>
+               
+                <div class="col-md-8 mb-3">
+                    <label>Image <small>(Max size: 5 MB)</small></label>
+                    <input type="file" name="multi_image[]" class="form-control">
+                </div>
+                <button type="button" class="btn btn-danger removeImage">Remove</button>
+            </div>
+        </div>
+    </div>
+    
   <div class="row">
     <div class="col-md-6 mb-3 form-check">
         <input type="checkbox" name="status" class="form-check-input" id="status" value="1" <?php echo set_checkbox('status','1'); ?>>
@@ -231,7 +252,7 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-    $('#category_activity').on('change', function() {
+    $('#category_id').on('change', function() {
         var category_id = $(this).val();
         var $activities = $('#activities');
         $activities.html('<option value="">Loading...</option>');
@@ -262,6 +283,23 @@ $(document).ready(function() {
         placeholder: "Select Activities"
     });
 });
+</script>
+
+<script>
+$("#addImage").click(function(){
+    let html = `<div class="galleryContainerItem border p-3 mb-3">
+        <div class="row">
+            <div class="col-md-4 mb-3"><label>Name</label><input type="text" name="image_name[]" class="form-control"></div>
+            <div class="col-md-8 mb-3"><label>Image</label><input type="file" name="multi_image[]" class="form-control"></div>
+            <div class="col-12">
+                <button type="button" class="btn btn-danger removeImage">Remove</button>
+            </div>
+        </div>
+    </div>`;
+    $("#galleryContainer").append(html);
+});
+$(document).on("click",".removeImage",function(){ $(this).closest(".galleryContainerItem").remove(); });
+
 </script>
 <style>
 .steps-links a {

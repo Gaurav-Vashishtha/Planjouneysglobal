@@ -39,11 +39,11 @@
 
         <div class="col-md-3 mb-3">
             <label class="form-label">Activity Category <span class="text-danger"></span></label>
-            <select name="category_activity" id="category_activity" class="form-select">
+            <select name="category_id" id="category_id" class="form-select">
                 <option value="">Select Activity Category</option>
                 <?php foreach($activity_categories as $cat): ?>
                     <option value="<?= $cat->id ?>"
-                        <?= ($activities->category_activity == $cat->id) ? 'selected' : '' ?>>
+                        <?= ($activities->category_id == $cat->id) ? 'selected' : '' ?>>
                         <?= $cat->category_name ?>
                     </option>
                 <?php endforeach; ?>
@@ -97,6 +97,58 @@
             <?php endif; ?>
         </div>
     </div>
+
+<div class="mb-4">
+    <h5>Multiple Images</h5>
+    <div id="galleryContainer">
+
+        <?php if (!empty($activities->gallery) && is_array($activities->gallery)): ?>
+            <?php foreach ($activities->gallery as $index => $mt): ?>
+                <div class="galleryContainerItem border p-3 mb-3 position-relative">
+                    <?php if ($index > 0): ?>
+                        <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0 removeImage">Remove</button>
+                    <?php endif; ?>
+
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <label>Name</label>
+                            <input type="text" name="image_name[]" class="form-control"
+                                   value="<?= htmlspecialchars($mt['image_name']); ?>">
+                        </div>
+
+                        <div class="col-md-8">
+                            <label>Image <small>(Max size: 5 MB)</small></label><br>
+                            <?php if (!empty($mt['image'])): ?>
+                                <img src="<?php echo base_url($mt['image']); ?>" width="100" class="mb-2">
+                            <?php endif; ?>
+                            <input type="file" name="multi_image[]" class="form-control">
+                        </div>
+
+                        <input type="hidden" name="existing_images[]" value="<?= htmlspecialchars($mt['image']); ?>">
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <div class="galleryContainerItem border p-3 mb-3 position-relative">
+                <div class="row g-2">
+                    <div class="col-md-4">
+                        <label>Name</label>
+                        <input type="text" name="image_name[]" class="form-control">
+                    </div>
+
+                    <div class="col-md-8">
+                        <label>Image <small>(Max size: 5 MB)</small></label>
+                        <input type="file" name="multi_image[]" class="form-control">
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <button type="button" id="addImage" class="btn btn-outline-primary btn-sm">Add More</button>
+</div>
+
+
     
  <div class="row">
     <div class="col-md-6 mb-3 form-check">
@@ -260,13 +312,13 @@ $(document).ready(function () {
         placeholder: "Select Activities"
     });
 
-    let categoryActivity = "<?= $activities->category_activity ?>";
+    let categoryActivity = "<?= $activities->category_id ?>";
 
     if (categoryActivity) {
         loadActivities(categoryActivity);
     }
 
-    $('#category_activity').on('change', function () {
+    $('#category_id').on('change', function () {
         let categoryId = $(this).val();
         $('#activities').empty().trigger('change');
 
@@ -301,4 +353,44 @@ $(document).ready(function () {
 
 });
 </script>
-
+<script>
+    $('#addImage').on('click', function () {
+        var html = `
+            <div class="galleryContainerItem border p-3 mb-3 position-relative">
+                <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0 removeImage">Remove</button>
+                <div class="row g-2">
+                    <div class="col-md-4">
+                        <label>Name</label>
+                        <input type="text" name="image_name[]" class="form-control">
+                    </div>
+                    <div class="col-md-8">
+                        <label>Image</label>
+                        <input type="file" name="multi_image[]" class="form-control" accept="image/*">
+                    </div>
+                </div>
+            </div>`;
+        $("#galleryContainer").append(html);
+    });
+    $(document).on("click", ".removeImage", function () {
+        $(this).closest(".galleryContainerItem").remove();
+    });
+</script>
+<style>
+.steps-links a {
+    margin-left: 5px;
+    text-decoration: none;
+    color: #0d6efd;
+    font-weight: 600;
+}
+.steps-links a.active { text-decoration: underline; }
+.steps-links a.disabled { color: #aaa; pointer-events: none; }
+.step-card {
+    border-radius: 12px;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+.ck-editor__editable_inline {
+    min-height: 120px !important;
+}
+</style>

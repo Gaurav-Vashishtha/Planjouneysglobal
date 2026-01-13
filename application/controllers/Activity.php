@@ -61,12 +61,8 @@ public function create() {
     $post = $this->input->post(NULL, TRUE);
 
     $slug = $this->Activity_model->make_unique_slug($post['title']);
-
-    // $languages = !empty($post['language']) ? json_encode($post['language']) : json_encode([]);
-
-    $activity_category_id = $post['category_activity'] ?? null;
+    $activity_category_id = $post['category_id'] ?? null;
     $activity_category_name = null;
-
     if ($activity_category_id) {
         $cat = $this->db
             ->where('id', $activity_category_id)
@@ -99,7 +95,7 @@ public function create() {
         'slug'              => $slug,
         'category'          => $post['category'],
         'location_id' => $post['location_id'] ?? null,
-        'category_activity'      => $activity_category_id,
+        'category_id'      => $activity_category_id,
         'activity_category_name' => $activity_category_name,
         'activity_names' => !empty($activity_names)? implode(', ', $activity_names): null,
         'short_description' => $post['short_description'] ?? null,
@@ -107,15 +103,6 @@ public function create() {
         'meta_title'        => $post['meta_title'] ?? null,
         'meta_description'  => $post['meta_description'] ?? null,
         'price'             => $post['price'] ?? 0,
-        // 'accommodation'     => $post['accommodation'] ?? null,
-        // 'meals'             => $post['meals'] ?? null,
-        // 'transportation'    => $post['transportation'] ?? null,
-        // 'group_size'        => $post['group_size'] ?? null,
-        // 'language'          => $languages,
-        // 'animal'            => $post['animal'] ?? null,
-        // 'age_range'         => $post['age_range'] ?? null,
-        // 'season'            => $post['season'] ?? null,
-        // 'activity_type'         => $post['activity_type'] ?? null,
         'highlights_of_activity' => $post['highlights_of_activity'] ?? null,
         'additional_info' => $post['additional_info'] ?? null,
         'inclusion'         => $post['inclusion'] ?? null,
@@ -147,6 +134,59 @@ public function create() {
             return;
         }
     }
+
+    $image_names = $this->input->post('image_name');
+    $activity_images = [];
+
+    if (!empty($_FILES['multi_image']['name'])) {
+
+        $count = count($_FILES['multi_image']['name']);
+
+        for ($i = 0; $i < $count; $i++) {
+
+            if ($_FILES['multi_image']['name'][$i] != '') {
+
+                $_FILES['file']['name']     = $_FILES['multi_image']['name'][$i];
+                $_FILES['file']['type']     = $_FILES['multi_image']['type'][$i];
+                $_FILES['file']['tmp_name'] = $_FILES['multi_image']['tmp_name'][$i];
+                $_FILES['file']['error']    = $_FILES['multi_image']['error'][$i];
+                $_FILES['file']['size']     = $_FILES['multi_image']['size'][$i];
+
+                $config = [
+                    'upload_path'   => './uploads/activity_gallery/',
+                    'allowed_types' => 'jpg|jpeg|png|gif|webp',
+                    'max_size'      => 5120
+                ];
+
+                if (!is_dir($config['upload_path'])) {
+                    mkdir($config['upload_path'], 0755, true);
+                }
+               $this->load->library('upload');
+                $this->upload->initialize($config);
+
+                if ($this->upload->do_upload('file')) {
+                    $uploaded = $this->upload->data();
+                    $activity_images[$i] = 'uploads/activity_gallery/' . $uploaded['file_name'];
+                } else {
+                    $activity_images[$i] = null;
+                }
+
+            } else {
+                $activity_images[$i] = null;
+            }
+        }
+    }
+    $final_activity_images = [];
+
+    if (!empty($image_names)) {
+        foreach ($image_names as $index => $name) {
+            $final_activity_images[] = [
+                'image_name' => $name,
+                'image'      => $activity_images[$index] ?? null
+            ];
+        }
+    }
+    $payload['gallery'] = !empty($final_activity_images) ? json_encode($final_activity_images) : null;
     $activities_id = $this->Activity_model->insert($payload);
     $this->session->set_flashdata('success', 'Activity created successfully.');
     redirect('admin/activities');
@@ -161,8 +201,7 @@ public function edit($id = null)
     $activities = $this->Activity_model->get_by_id($id);
     if (!$activities) show_404();
 
-
-    $activities->language = !empty($activities->language) ? json_decode($activities->language, true) : [];
+    $activities->gallery = !empty($activities->gallery) ? json_decode($activities->gallery, true) : [];
 
 
     $this->form_validation->set_rules('title', 'Title', 'required');
@@ -180,10 +219,7 @@ public function edit($id = null)
     }
 
     $post = $this->input->post(NULL, TRUE);
-
-    // $languages = !empty($post['language']) ? json_encode($post['language']) : json_encode([]);
-   
-   $activity_category_id = $post['category_activity'] ?? null;
+    $activity_category_id = $post['category_id'] ?? null;
     $activity_category_name = null;
 
     if ($activity_category_id) {
@@ -214,7 +250,7 @@ public function edit($id = null)
         'title'             => $post['title'],
         'category'          => $post['category'],
         'location_id' => $post['location_id'] ?? null,
-        'category_activity'      => $activity_category_id,
+        'category_id'      => $activity_category_id,
         'activity_category_name' => $activity_category_name,
         'activity_names'         => !empty($activity_names) ? implode(', ', $activity_names) : null,
         'short_description' => $post['short_description'] ?? null,
@@ -222,15 +258,6 @@ public function edit($id = null)
         'meta_title'        => $post['meta_title'] ?? null,
         'meta_description'  => $post['meta_description'] ?? null,
         'price'             => $post['price'] ?? 0,
-        // 'accommodation'     => $post['accommodation'] ?? null,
-        // 'meals'             => $post['meals'] ?? null,
-        // 'transportation'    => $post['transportation'] ?? null,
-        // 'group_size'        => $post['group_size'] ?? null,
-        // 'language'          => $languages,
-        // 'animal'            => $post['animal'] ?? null,
-        // 'age_range'         => $post['age_range'] ?? null,
-        // 'season'            => $post['season'] ?? null,
-        // 'activity_type'         => $post['activity_type'] ?? null,
         'highlights_of_activity' => $post['highlights_of_activity'] ?? null,
         'additional_info' => $post['additional_info'] ?? null,
         'inclusion'         => $post['inclusion'] ?? null,
@@ -246,7 +273,7 @@ public function edit($id = null)
         $config['upload_path'] = './uploads/activities/';
         if (!is_dir($config['upload_path'])) mkdir($config['upload_path'], 0755, TRUE);
 
-        $config['allowed_types'] = 'jpg|jpeg|png|gif';
+        $config['allowed_types'] = 'jpg|jpeg|png|gif|webp';
         $config['max_size'] = 2048;
         $this->load->library('upload', $config);
 
@@ -258,8 +285,57 @@ public function edit($id = null)
             redirect('admin/activities/edit/' . $id);
             return;
         }
-    }
+    } 
 
+    $image_names = $this->input->post('image_name'); 
+    $existing_images = $this->input->post('existing_images'); 
+    $activity_images = [];
+
+   
+    if (!empty($_FILES['multi_image']['name'])) {
+        $count = count($_FILES['multi_image']['name']);
+
+        for ($i = 0; $i < $count; $i++) {
+            if ($_FILES['multi_image']['name'][$i] != '') {
+                $_FILES['file']['name'] = $_FILES['multi_image']['name'][$i];
+                $_FILES['file']['type'] = $_FILES['multi_image']['type'][$i];
+                $_FILES['file']['tmp_name'] = $_FILES['multi_image']['tmp_name'][$i];
+                $_FILES['file']['error'] = $_FILES['multi_image']['error'][$i];
+                $_FILES['file']['size'] = $_FILES['multi_image']['size'][$i];
+
+                $config = [
+                    'upload_path' => './uploads/activity_gallery/',
+                    'allowed_types' => 'jpg|jpeg|png|gif',
+                    'max_size' => 5120
+                ];
+
+                if (!is_dir($config['upload_path'])) {
+                    mkdir($config['upload_path'], 0755, true);
+                }
+                $this->load->library('upload');
+                $this->upload->initialize($config);
+
+                if ($this->upload->do_upload('file')) {
+                    $uploaded = $this->upload->data();
+                    $activity_images[$i] = 'uploads/activity_gallery/' . $uploaded['file_name'];
+                } else {
+                    $activity_images[$i] = null;
+                }
+            } else {
+                $activity_images[$i] = null;
+            }
+        }
+    }
+    $final_activity_images = [];
+    if (!empty($image_names)) {
+        foreach ($image_names as $index => $name) {
+            $final_activity_images[] = [
+                'image_name' => $name,
+                'image' => $activity_images[$index] ?? $existing_images[$index] ?? null
+            ];
+        }
+    }
+    $payload['gallery'] = !empty($final_activity_images) ? json_encode($final_activity_images) : null;
         $this->Activity_model->update($id, $payload);
         $this->session->set_flashdata('success', 'activities updated successfully.');
         redirect('admin/activities');
@@ -315,6 +391,9 @@ public function get_activities_by_category($category_id = null)
 
     echo json_encode($activities);
 }
+
+
+
 }
 
 

@@ -244,7 +244,7 @@ $route['api/package/(:any)']['get'] = 'Api/PackageController/get_package_by_slug
 $route['api/popular_Packages']['get'] = 'Api/PackageController/get_popular_packages';
 $route['api/domestic_packages']['get'] = 'Api/PackageController/get_domestic_packages';
 $route['api/domestic_honeymoon_packages']['get'] = 'Api/PackageController/domestic_honeymoon_packages';
-$route['api/packages_by_location/(:any)']['get'] = 'Api/PackageController/get_package_by_location/$1';
+$route['api/related_packages/(:any)/(:any)']['get'] = 'Api/PackageController/get_package_by_location/$1/$2';
 
 
 
@@ -286,7 +286,7 @@ $route['api/advertiesBanner']['get'] = 'Api/HomeController/get_all_advertiesBann
 $route['api/activities']['get'] = 'Api/ActivityController/get_activities';
 $route['api/activity/(:any)']['get'] = 'Api/ActivityController/get_activity_by_slug/$1';
 $route['api/popular_activities']['get'] = 'Api/ActivityController/get_popularActivities';
-
+$route['api/relevant_activities/(:num)/(:num)']['get'] = 'Api/ActivityController/get_relevant_activities/$1/$2';
 
 
 // Pages
