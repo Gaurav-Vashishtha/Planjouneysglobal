@@ -250,6 +250,18 @@ public function search_packages_with_destination($search_term)
 }
 
 
+public function get_related_packages($location_id, $exclude_package_id, $limit = 8)
+{
+    return $this->db
+        ->select('title, slug, image, duration, price')
+        ->where('location_id', $location_id)
+        ->where('id !=', $exclude_package_id)
+        ->where('status', 1)
+        ->limit($limit)
+        ->get('packages')
+        ->result_array();
+}
+
 
 
 }
