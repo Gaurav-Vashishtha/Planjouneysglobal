@@ -56,6 +56,18 @@ class ActivityController extends CI_Controller
                     $activity = (object) $activity;
                 }
 
+                 if (!empty($activity->gallery)) {
+                 $gallery = json_decode($activity->gallery, true);
+                 if (is_array($gallery)) {
+                    foreach ($gallery as &$img) {
+                        if (!empty($img['image'])) {
+                            $img['image'] = base_url($img['image']);
+                        }
+                    }
+                    $activity->gallery = json_encode($gallery);
+                }
+            }
+
                 $inrPrice = isset($activity->price) ? (float) $activity->price : 0;
 
                 $activity->price_inr = $inrPrice;
@@ -102,6 +114,18 @@ class ActivityController extends CI_Controller
         if (is_array($activity)) {
             $activity = (object) $activity;
         }
+
+         if (!empty($activity->gallery)) {
+                $gallery = json_decode($activity->gallery, true);
+                if (is_array($gallery)) {
+                    foreach ($gallery as &$img) {
+                        if (!empty($img['image'])) {
+                            $img['image'] = base_url($img['image']);
+                        }
+                    }
+                    $activity->gallery = json_encode($gallery);
+                }
+            }
 
         $rates = $this->get_rates();
         $inrPrice = isset($activity->price) ? (float) $activity->price : 0;
@@ -301,6 +325,18 @@ public function get_searched_activities()
                 if (is_array($activity)) {
                     $activity = (object) $activity;
                 }
+
+                 if (!empty($activity->gallery)) {
+                    $gallery = json_decode($activity->gallery, true);
+                    if (is_array($gallery)) {
+                    foreach ($gallery as &$img) {
+                        if (!empty($img['image'])) {
+                            $img['image'] = base_url($img['image']);
+                        }
+                    }
+                    $activity->gallery = json_encode($gallery);
+                }
+            }
 
                 $inrPrice = isset($activity->price) ? (float) $activity->price : 0;
 
