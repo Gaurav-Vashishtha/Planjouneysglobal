@@ -282,6 +282,18 @@ public function get_searched_activities()
                 if (is_array($act)) {
                     $act = (object) $act;
                 }
+
+                 if (!empty($activity->gallery)) {
+                    $gallery = json_decode($activity->gallery, true);
+                    if (is_array($gallery)) {
+                    foreach ($gallery as &$img) {
+                        if (!empty($img['image'])) {
+                            $img['image'] = base_url($img['image']);
+                        }
+                    }
+                    $activity->gallery = json_encode($gallery);
+                }
+            }
                 $inrPrice = isset($act->price) ? (float) $act->price : 0;
                 $act->price_inr = $inrPrice;  
                 $act->price_usd = $inrPrice * $rates['USD'];  

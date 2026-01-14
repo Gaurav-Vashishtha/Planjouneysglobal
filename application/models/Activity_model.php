@@ -196,34 +196,62 @@ class Activity_model extends CI_Model {
     }
  
      
+// public function search_activites_with_detail($search_term)
+// {
+//     $columns = $this->db->list_fields('activities');
+//     $this->db->group_start();
+
+//     foreach ($columns as $column) {
+//         if ($column == 'activity_names') {
+//             $escaped_search_term = $this->db->escape_str(trim($search_term));
+            
+//             $this->db->or_where(
+//               "FIND_IN_SET(" .
+//             $this->db->escape(trim($escaped_search_term)) .
+//             ", REPLACE(activity_names, ', ', ',')) !=", 
+//             0,
+//             false
+//         );
+ 
+//         } else {
+//             $this->db->or_like($column, $search_term);
+//         }
+//     }
+
+//     $this->db->group_end();
+//     $this->db->where('status', 1);
+//     $this->db->order_by('id', 'DESC');
+
+
+//     return $this->db->get('activities')->result_array();
+// }
+
+
 public function search_activites_with_detail($search_term)
 {
-    $columns = $this->db->list_fields('activities');
+    $search_term = trim($search_term);
+
+    $this->db->from('activities');
+    $this->db->where('status', 1);
+
     $this->db->group_start();
 
-    foreach ($columns as $column) {
-        if ($column == 'activity_names') {
-            $escaped_search_term = $this->db->escape_str(trim($search_term));
-            
-            $this->db->or_where(
-              "FIND_IN_SET(" .
-            $this->db->escape(trim($escaped_search_term)) .
-            ", REPLACE(activity_names, ', ', ',')) !=", 
+        $this->db->like('title', $search_term);
+
+        // Search in comma-separated activity_names
+        $this->db->or_where(
+            "FIND_IN_SET(" .
+            $this->db->escape($search_term) .
+            ", REPLACE(activity_names, ', ', ',')) !=",
             0,
             false
         );
- 
-        } else {
-            $this->db->or_like($column, $search_term);
-        }
-    }
 
     $this->db->group_end();
-    $this->db->where('status', 1);
+
     $this->db->order_by('id', 'DESC');
 
-
-    return $this->db->get('activities')->result_array();
+    return $this->db->get()->result_array();
 }
 
 public function get_popular_activities(){

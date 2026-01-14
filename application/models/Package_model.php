@@ -231,7 +231,6 @@ public function search_packages_with_destination($search_term)
     $this->db->from('packages');
     $this->db->group_start();
     $this->db->like('title', $search_term); 
-    $this->db->or_like('description', $search_term); 
     $this->db->group_end();
     $this->db->where('status', 1);  
     $this->db->order_by('id', 'DESC'); 

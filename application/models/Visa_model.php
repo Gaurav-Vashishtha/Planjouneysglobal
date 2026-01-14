@@ -76,20 +76,35 @@ class Visa_model extends CI_Model {
 
 
 
+    // public function get_visa_countries($country_name = '')
+    // {
+    //     $this->db->select('DISTINCT(country_name) as country_name, slug');
+    //     $this->db->from($this->table);
+        
+    //     if (!empty($country_name)) {
+    //         $this->db->like('country_name', $country_name);
+    //     }
+
+    //     $this->db->order_by('country_name', 'ASC');
+
+    //     return $this->db->get()->result_array();
+    // }
+  
+
     public function get_visa_countries($country_name = '')
     {
-        $this->db->select('DISTINCT(country_name) as country_name, slug');
+        $this->db->select('country_name, MIN(slug) as slug');
         $this->db->from($this->table);
-        
+
         if (!empty($country_name)) {
             $this->db->like('country_name', $country_name);
         }
 
+        $this->db->group_by('country_name');
         $this->db->order_by('country_name', 'ASC');
 
         return $this->db->get()->result_array();
     }
-  
     
     public function get_all_active(){
         return $this->db->where('status', 1)
