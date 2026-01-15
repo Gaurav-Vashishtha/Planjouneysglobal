@@ -238,7 +238,6 @@ public function search_activites_with_detail($search_term)
 
         $this->db->like('title', $search_term);
 
-        // Search in comma-separated activity_names
         $this->db->or_where(
             "FIND_IN_SET(" .
             $this->db->escape($search_term) .
