@@ -124,7 +124,7 @@ class BookingController extends CI_Controller
         }
     }
 
-       public function visa_form_sumbit()
+ public function visa_form_sumbit()
 {
     $input = json_decode($this->input->raw_input_stream, true);
     if (empty($input)) {
@@ -170,5 +170,50 @@ class BookingController extends CI_Controller
     return $this->_response(false, 'Enquiry failed. Please try again.');
 }
 
-    
+
+
+public function poster_form_sumbit(){
+
+$input = json_decode($this->input->raw_input_stream, true);
+
+if(empty($input)){
+    $input = $this->input->post();
+    }
+
+    if(empty($input)){
+        return $this->_response(false, 'no input data recived');
+    }
+
+    $data =[
+      
+    'name'  => trim($input['name'] ?? ''),
+    'email' => trim($input['email'] ?? ''),
+    'phone' => trim($input['phone'] ?? ''),
+    'poster_name' => trim($input['poster_name'] ?? ''),
+    'message' => trim($input['message'] ?? '')
+    ];
+
+    if (
+        empty($data['name']) ||
+        empty($data['email']) 
+      
+        
+    ) {
+        return $this->_response(false, 'Please fill all required fields.');
+    }
+
+    $saved = $this->Booking_model->poster_create($data);
+
+    if ($saved) {
+        return $this->_response(true, 'Enquiry submitted successfully.', [
+            'name'  => $data['name'],
+            'email' => $data['email']
+        ]);
+    }
+
+    return $this->_response(false, 'Enquiry failed. Please try again.');
 }
+
+}
+    
+

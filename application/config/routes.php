@@ -266,6 +266,8 @@ $route['api/booking']['post'] = 'Api/BookingController/index';
 // Contact_Us API
 $route['api/contact_us']['post'] = 'Api/BookingController/contact_us_form';
 $route['api/visa_form']['post'] = 'Api/BookingController/visa_form_sumbit';
+$route['api/poster_summit']['post'] = 'Api/BookingController/poster_form_sumbit';
+
 
 
 

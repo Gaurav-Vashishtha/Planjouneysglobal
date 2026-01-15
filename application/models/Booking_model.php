@@ -30,5 +30,9 @@ class Booking_model extends CI_Model
     public function visa_create($data){
         return $this->db->insert('visa_enquiries', $data);
     }
+
+    public function poster_create($data){
+        return $this->db->insert('poster_query', $data);
+    }
     
 }
