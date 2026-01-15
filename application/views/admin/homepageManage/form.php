@@ -36,15 +36,31 @@
 
     <h3>Popular Packages</h3>
     <textarea name="popular_packages" id="popular_packages" class="form-control mb-3"><?= isset($home->popular_packages) ? $home->popular_packages : '' ?></textarea><br>
+    
 
-     <h3>Popular Activities</h3>
+   <h3>Popular Packages Bottom Text</h3>
+    <textarea name="popular_packages_bottom" id="popular_packages_bottom" class="form-control mb-3"><?= isset($home->popular_packages_bottom) ? $home->popular_packages_bottom : '' ?></textarea><br>
+
+    <h3>Popular Activities</h3>
     <textarea name="popular_activies" id="popular_activies" class="form-control mb-3"><?= isset($home->popular_activies) ? $home->popular_activies : '' ?></textarea><br>
 
-     <h3>Popular Blogs</h3>
+    <h3>Popular Activities Bottom Text</h3>
+    <textarea name="popular_activies_bottom" id="popular_activies_bottom" class="form-control mb-3"><?= isset($home->popular_activies_bottom) ? $home->popular_activies_bottom : '' ?></textarea><br>
+
+
+    <h3>Popular Blogs</h3>
     <textarea name="popular_blogs" id="popular_blogs" class="form-control mb-3"><?= isset($home->popular_blogs) ? $home->popular_blogs : '' ?></textarea><br>
+
+    <h3>Popular Blogs Bottom Text</h3>
+    <textarea name="popular_blogs_bottom" id="popular_blogs_bottom" class="form-control mb-3"><?= isset($home->popular_blogs_bottom) ? $home->popular_blogs_bottom : '' ?></textarea><br>
+
 
      <h3>Popular Visa</h3>
     <textarea name="popular_visa" id="popular_visa" class="form-control mb-3"><?= isset($home->popular_visa) ? $home->popular_visa : '' ?></textarea><br>
+    
+     <h3>Popular Visa Bottom Text</h3>
+    <textarea name="popular_visa_bottom" id="popular_visa_bottom" class="form-control mb-3"><?= isset($home->popular_visa_bottom) ? $home->popular_visa_bottom : '' ?></textarea><br>
+
 
     <h3>Top Destination</h3>
     <input type="text" name="heading" class="form-control mb-1" placeholder="Heading" value="<?= isset($home->top_destination_heading) ? $home->top_destination_heading : '' ?>">
@@ -143,6 +159,10 @@ ClassicEditor.create(document.querySelector('#testimonial_section')).catch(err =
 ClassicEditor.create(document.querySelector('#popular_visa')).catch(err => console.error(err));
 ClassicEditor.create(document.querySelector('#popular_blogs')).catch(err => console.error(err));
 ClassicEditor.create(document.querySelector('#popular_activies')).catch(err => console.error(err));
+ClassicEditor.create(document.querySelector('#popular_packages_bottom')).catch(err => console.error(err));
+ClassicEditor.create(document.querySelector('#popular_activies_bottom')).catch(err => console.error(err));
+ClassicEditor.create(document.querySelector('#popular_blogs_bottom')).catch(err => console.error(err));
+ClassicEditor.create(document.querySelector('#popular_visa_bottom')).catch(err => console.error(err));
 
 
 </script>

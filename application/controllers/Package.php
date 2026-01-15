@@ -58,8 +58,6 @@ public function create() {
     $post = $this->input->post(NULL, TRUE);
 
     $slug = $this->Package_model->make_unique_slug($post['title']);
-
-    // $languages = !empty($post['language']) ? json_encode($post['language']) : json_encode([]);
     $tour_types = !empty($post['tour_type']) ? json_encode($post['tour_type']) : json_encode([]);
     $accommodations = !empty($post['accommodation']) ? json_encode($post['accommodation']) : json_encode([]);
   
@@ -79,17 +77,9 @@ public function create() {
         'meta_keyword'  => $post['meta_keyword'] ?? null,
         'price'             => $post['price'] ?? 0,
         'duration'          => $post['duration'] ?? null,
-        // 'accommodation'     => $post['accommodation'] ?? null,
         'accommodation'     => $accommodations,
         'meals'             => $post['meals'] ?? null,
         'transportation'    => $post['transportation'] ?? null,
-        // 'group_size'        => $post['group_size'] ?? null,
-        // 'language'          => $languages,
-        // 'animal'            => $post['animal'] ?? null,
-        // 'age_range'         => $post['age_range'] ?? null,
-        // 'season'            => $post['season'] ?? null,
-        // 'tour_type'         => $post['tour_type'] ?? null,
-        'tour_type'         => $tour_types,
         'highlights_of_tours' => $post['highlights_of_tours'] ?? null,
         'additional_info' => $post['additional_info'] ?? null,
         'day_details'      => $post['day_details'] ?? null,
@@ -158,9 +148,6 @@ public function edit($id = null)
     if (!$package) show_404();
 
 
-    // $package->accommodations = !empty($package->accommodations) ? json_decode($package->accommodations, true) : [];
-    // $package->tour_types = !empty($package->tour_types) ? json_decode($package->tour_types, true) : [];
-
     $this->form_validation->set_rules('title', 'Title', 'required');
     $this->form_validation->set_rules('category', 'Category', 'required');
 
@@ -178,8 +165,6 @@ public function edit($id = null)
     $old_title = trim($package->title);
     $new_title = trim($post['title']);
      $slug = ($package->title !== $post['title']) ? $this->Package_model->make_unique_slug($post['title']) : $package->slug;
-
-    // $languages = !empty($post['language']) ? json_encode($post['language']) : json_encode([]);
     $tour_types = !empty($post['tour_type']) ? json_encode($post['tour_type']) : json_encode([]);
     $accommodations = !empty($post['accommodation']) ? json_encode($post['accommodation']) : json_encode([]);
    
@@ -197,16 +182,9 @@ public function edit($id = null)
         'meta_keyword'  => $post['meta_keyword'] ?? null,
         'price'             => $post['price'] ?? 0,
         'duration'          => $post['duration'] ?? null,
-        // 'accommodation'     => $post['accommodation'] ?? null,
         'accommodation'     => $accommodations,
         'meals'             => $post['meals'] ?? null,
         'transportation'    => $post['transportation'] ?? null,
-        // 'group_size'        => $post['group_size'] ?? null,
-        // 'language'          => $languages,
-        // 'animal'            => $post['animal'] ?? null,
-        // 'age_range'         => $post['age_range'] ?? null,
-        // 'season'            => $post['season'] ?? null,
-        // 'tour_type'         => $post['tour_type'] ?? null,
         'tour_type'         => $tour_types,
         'highlights_of_tours' => $post['highlights_of_tours'] ?? null,
         'additional_info' => $post['additional_info'] ?? null,

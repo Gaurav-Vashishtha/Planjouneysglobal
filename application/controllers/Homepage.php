@@ -112,6 +112,10 @@ class Homepage extends CI_Controller {
             'popular_activies' => $post['popular_activies'] ?? '',
             'popular_blogs' => $post['popular_blogs'] ?? '',
             'popular_visa' => $post['popular_visa'] ?? '',
+            'popular_packages_bottom' => $post['popular_packages_bottom'] ?? '',
+            'popular_activies_bottom' => $post['popular_activies_bottom'] ?? '',
+            'popular_blogs_bottom' => $post['popular_blogs_bottom'] ?? '',
+            'popular_visa_bottom' => $post['popular_visa_bottom'] ?? '',
             'top_destination_heading' => $post['heading'] ?? '',
             'top_destination_description' => $post['top_destination_description'] ?? '',
             'top_destinations' => json_encode($top_destinations),
@@ -124,7 +128,6 @@ class Homepage extends CI_Controller {
             'testimonial_section' => $post['testimonial_section'] ?? '',
             'top_agency_image' => $top_agency_image,
             'top_agency_link' => $post['top_agency_link'] ?? ''
-            // 'banner_images' => json_encode($banner_images)
         ];
 
 
