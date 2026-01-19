@@ -23,9 +23,27 @@ class Booking_model extends CI_Model
     }
 
 
-    public function contact_create($data){
-        return $this->db->insert('contact_us', $data);
+        public function contact_create($data)
+    {
+        $this->db->insert('contact_us', $data);
+        return $this->db->insert_id(); 
     }
+
+
+    public function get_booking_with_location($contact_id)
+    {
+        return $this->db
+            ->select('b.*, l.name AS location_name')
+            ->from('contact_us b')
+            ->join('location l', 'l.id = b.location_id', 'left')
+            ->where('b.id', $contact_id)
+            ->get()
+            ->row_array();
+    }
+
+
+
+
     
     public function visa_create($data){
         return $this->db->insert('visa_enquiries', $data);
